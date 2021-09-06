@@ -1,2 +1,2 @@
-# space_weather
+# SOLARWINDPy
 A project to analyze some magnetic storm phenomena
