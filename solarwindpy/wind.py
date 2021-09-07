@@ -26,6 +26,7 @@ import sys
 import numpy as np
 import pandas as pd
 import scipy.linalg as la
+import cdflib
 
 # ============================================================================
 # CLASSES
@@ -79,8 +80,13 @@ class Wind():
 
 def read_cdf(input_file):
     '''
+    Based on library https://github.com/MAVENSDC/cdflib
     :param input_file:
     :return: n-dimensional array that represents a solar wind
     '''
-    wind = 1
-    return wind
+    cdf_file = cdflib.CDF(input_file)
+    return cdf_file
+
+
+cdf_file = read_cdf('./data/ac_h2s_swe_20100401000000_20100406000000.cdf')
+cdf_file.cdf_info()
