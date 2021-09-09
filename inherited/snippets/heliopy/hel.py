@@ -21,7 +21,7 @@ data = wind.mfi_h0(starttime, endtime)
 print(data.columns)
 data = data.to_dataframe()
 
-vector = data.loc[:,['BGSM_0', 'BGSM_1', 'BGSM_2']]
+vector = data.loc[:,['BGSE_0', 'BGSE_1', 'BGSE_2']]
 
 print(vector)
 
