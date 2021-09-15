@@ -13,6 +13,7 @@ A:
 Q: Cuando podemos tener una muestra del archivo cdf?
 A:
 
+Q: COmo definimos una nueva en la clase de solardwind?
 A:
 '''
 # =============================================================================
@@ -32,26 +33,58 @@ import cdflib
 # CLASSES
 # ============================================================================
 
-class Wind():
+class SolarWind():
 
     def __init__(self):
         self.M = 1
         self.epsilon = 1e-4
         pass
 
-    def clean(self):
+    def clean_wind(self):
         # Remove data gaps and produce for bx_gse inside the cloud
-
+        '''
+                epsilon=1e-4;
+        if gap>0,
+           cond_good=find(bx_gse_ext_<gap-epsilon & by_gse_ext_<gap-epsilon & bz_gse_ext_<gap-epsilon);
+        elseif gap<0,
+           cond_good=find(bx_gse_ext_>gap+epsilon & by_gse_ext_>gap+epsilon & bz_gse_ext_>gap+epsilon);
+        else
+           'ERROR: gap flag cannot be zero'
+        end
+        bx_gse_ext=bx_gse_ext_(cond_good);
+        by_gse_ext=by_gse_ext_(cond_good);
+        bz_gse_ext=bz_gse_ext_(cond_good);
+        date_ext=date_ext_(cond_good);
+        B=B__(cond_good);
+        clear cond_good
+                :return:
+        '''
         pass
 
-    def ordered_eigen(self, M):
-        if M.shape[0] == M.shape[1]:
-            eigvals, eigvecs = la.eig(M)
-            #do ordering
-        else:
-            sys.exit('Matrix should be square')
 
     def get_cloud(self):
+        '''
+        Tiene que recibir como input las fechas
+
+                epsilon=1e-4;
+        if gap>0,
+           cond_good=find(bx_gse_ext_<gap-epsilon & by_gse_ext_<gap-epsilon & ...
+           bz_gse_ext_<gap-epsilon & date_ext_>=initial_date & date_ext_<=end_date);
+        elseif gap<0,
+           cond_good=find(bx_gse_ext_>gap+epsilon & by_gse_ext_>gap+epsilon & ...
+           bz_gse_ext_>gap+epsilon & date_ext_>=initial_date & date_ext_<=end_date);
+        else
+           'ERROR: gap flag cannot be zero'
+        end
+        % Comment: for simplicity in notation define bi as b_gse_i (i=x,y,z)
+        bx=bx_gse_ext_(cond_good);
+        by=by_gse_ext_(cond_good);
+        bz=bz_gse_ext_(cond_good);
+        date_=date_ext_(cond_good);
+        B_=B__(cond_good);
+        clear cond cond_good
+                :return:
+        '''
         pass
 
     def plot(self):
