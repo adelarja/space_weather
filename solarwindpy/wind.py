@@ -22,12 +22,11 @@ A:
 # =============================================================================
 # IMPORTS
 # =============================================================================
-
-from pandas import DataFrame
 import heliopy.data.wind as wind
 import cdflib
 from dataclasses import dataclass
 from datetime import datetime
+
 # ============================================================================
 # CLASSES
 # ============================================================================
@@ -40,6 +39,7 @@ class Period:
     TODO: Add some properties/setters to obtain relative dates. For example, to obtain relative dates from 'date_to',
         receiving seconds, minutes, hours, days, months, etc. The same for date_from.
     """
+
     date_from: datetime
     date_to: datetime
 
@@ -52,6 +52,7 @@ class MagneticField:
     Instead of working over a DataFrame row, we will work over a MagneticField (MagneticField has the data
     corresponding to one row of the dataframe obtained using DataManager object).
     """
+
     time: datetime
     bgse0: float
     bgse1: float
@@ -59,7 +60,6 @@ class MagneticField:
 
 
 class DataManager:
-
     @staticmethod
     def get_gse_magnetic_vector(period: Period) -> list[MagneticField]:
         """This method retrieves the Magnetic Field Vector in Geocentric Solar Ecliptic System (GSE).
@@ -80,10 +80,14 @@ class DataManager:
         """
         cdf_data = wind.mfi_h0(period.date_from, period.date_to)
         cdf_data = cdf_data.to_dataframe()
-        cdf_data = cdf_data.loc[:, ['BGSE_0', 'BGSE_1', 'BGSE_2']]
+        cdf_data = cdf_data.loc[:, ["BGSE_0", "BGSE_1", "BGSE_2"]]
 
-        return [MagneticField(time, components['BGSE_0'], components['BGSE_1'], components['BGSE_0'])
-                for time, components in cdf_data.iterrows()]
+        return [
+            MagneticField(
+                time, components["BGSE_0"], components["BGSE_1"], components["BGSE_0"]
+            )
+            for time, components in cdf_data.iterrows()
+        ]
 
 
 class SolarWind:
