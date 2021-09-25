@@ -24,7 +24,18 @@ from setuptools import setup  # noqa
 PATH = pathlib.Path(os.path.abspath(os.path.dirname(__file__)))
 
 
-REQUIREMENTS = ["numpy", "pandas", "scipy", "attrs", "matplotlib", "heliopy"]
+REQUIREMENTS = [
+    "numpy",
+    "pandas",
+    "scipy",
+    "attrs",
+    "matplotlib",
+    "heliopy",
+    "requests",
+    "sunpy",
+    "h5netcdf",
+    "cdflib",
+]
 
 with open(PATH / "solarwindpy" / "__init__.py") as fp:
     for line in fp.readlines():

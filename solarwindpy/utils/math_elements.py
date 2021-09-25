@@ -23,37 +23,37 @@ import cdflib
 # ============================================================================
 # CLASSES
 # ============================================================================
-class elementos_matematicos():
+class ElementosMatematicos:
+    def __init__(self):
+        self.M = pd.DataFrame({})
+        self.epsilon = 1e-4
+        pass
 
-	def __init__(self):
-		self.M = 1
-		self.epsilon = 1e-4
-		pass
+    def min_variance(self):
+        """
+        % MV matrix (M)
+        % sigma^2_n=M*n*n
+        M(1,1)=mean(bx.^2)-mean(bx)^2;
+        M(2,2)=mean(by.^2)-mean(by)^2;
+        M(3,3)=mean(bz.^2)-mean(bz)^2;
+        M(1,2)=mean(bx.*by)-mean(bx)*mean(by);
+        M(1,3)=mean(bx.*bz)-mean(bx)*mean(bz);
+        M(2,3)=mean(by.*bz)-mean(by)*mean(bz);
+        M(2,1)=M(1,2);
+        M(3,1)=M(1,3);
+        M(3,2)=M(2,3);
+        """
+        return 1
 
-	def min_variance(self):
-		'''
-			% MV matrix (M)
-		% sigma^2_n=M*n*n
-		M(1,1)=mean(bx.^2)-mean(bx)^2;
-		M(2,2)=mean(by.^2)-mean(by)^2;
-		M(3,3)=mean(bz.^2)-mean(bz)^2;
-		M(1,2)=mean(bx.*by)-mean(bx)*mean(by);
-		M(1,3)=mean(bx.*bz)-mean(bx)*mean(bz);
-		M(2,3)=mean(by.*bz)-mean(by)*mean(bz);
-		M(2,1)=M(1,2);
-		M(3,1)=M(1,3);
-		M(3,2)=M(2,3);
-		'''
-	return 1
-
-	def ordered_eigen(self, M):
+    def ordered_eigen(self, M):
         if M.shape[0] == M.shape[1]:
             eigvals, eigvecs = la.eig(M)
-            #do ordering
+            # do ordering
         else:
-            raise ValueError('Matrix should be square')
+            raise ValueError("Matrix should be square")
 
-	'''
+
+"""
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % eigenvalues and eigenvectors
 [V,D] =eig(M);
@@ -86,8 +86,8 @@ eval1=lambda_ordenado(1);
 eval2=lambda_ordenado(2);
 eval3=lambda_ordenado(3);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	'''
 
 # ============================================================================
 # FUNCTIONS
 # ============================================================================
+"""
