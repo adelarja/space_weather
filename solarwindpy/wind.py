@@ -22,10 +22,11 @@ A:
 # =============================================================================
 # IMPORTS
 # =============================================================================
-import heliopy.data.wind as wind
-import cdflib
 from dataclasses import dataclass
 from datetime import datetime
+
+import cdflib
+import heliopy.data.wind as wind
 
 # ============================================================================
 # CLASSES
@@ -75,8 +76,10 @@ class DataManager:
         Example:
             >>> date_from = datetime(2021, 1, 1, 0, 0, 0)
             >>> date_to = datetime(2021, 1, 1, 1, 0, 0)
-            >>> period = Period(date_from, date_to)
-            >>> cdf_file_data = DataManager.get_gse_magnetic_vector(period)
+            >>> data_period = Period(date_from, date_to)
+            >>> cdf_file_data = DataManager.get_gse_magnetic_vector(data_period)
+
+        TODO: What happens if we don't retrieve any data? Or if we passed a date_from greater than date_to?
         """
         cdf_data = wind.mfi_h0(period.date_from, period.date_to)
         cdf_data = cdf_data.to_dataframe()
@@ -84,7 +87,7 @@ class DataManager:
 
         return [
             MagneticField(
-                time, components["BGSE_0"], components["BGSE_1"], components["BGSE_0"]
+                time, components["BGSE_0"], components["BGSE_1"], components["BGSE_2"]
             )
             for time, components in cdf_data.iterrows()
         ]
