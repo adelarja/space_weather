@@ -88,7 +88,10 @@ class DataManager:
 
         return [
             MagneticField(
-                time, components["BGSE_0"], components["BGSE_1"], components["BGSE_2"]
+                time,
+                components["BGSE_0"],
+                components["BGSE_1"],
+                components["BGSE_2"],
             )
             for time, components in cdf_data.iterrows()
         ]
