@@ -1,5 +1,5 @@
 # SOLARWINDPy
-<img src="logo_SWx.jpg" width="96" height="96" />
+<img src="res/logo_SWx.jpg" width="96" height="96" />
 A project to rotate a solar magnetic cloud
 
 ## Motivation
