@@ -2,7 +2,7 @@
 # DOCS
 # =====================================================================
 
-"""Add a description."""
+"""This file is for distribute and install solarwindpy."""
 
 # ======================================================================
 # IMPORTS
@@ -10,10 +10,6 @@
 
 import os
 import pathlib
-
-import ez_setup
-
-ez_setup.use_setuptools()
 
 from setuptools import setup  # noqa
 
@@ -53,23 +49,23 @@ with open("README.md") as fp:
 # =============================================================================
 
 setup(
-    name="Solarwindpy",
+    name="solarwindpy",
     version=VERSION,
-    description="Package to make some analysis of solar storm phenomena.",
+    description="Package to rotate a solar magnetic cloud with Python.",
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
     author="",
     author_email="",
     url="",
-    py_modules=["ez_setup"],
+    py_modules=[],
     packages=[
         "solarwindpy",
     ],
     license="The MIT License",
     install_requires=REQUIREMENTS,
-    keywords=["solar", "wind", "space weather", "solarwindpy"],
+    keywords=["solar", "wind", "space weather", "solarwindpy", "magnetic cloud"],
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 1 - Planning",
         "Intended Audience :: Education",
         "Intended Audience :: Science/Research",
         "License :: OSI Approved :: MIT License",
