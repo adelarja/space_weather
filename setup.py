@@ -63,7 +63,13 @@ setup(
     ],
     license="The MIT License",
     install_requires=REQUIREMENTS,
-    keywords=["solar", "wind", "space weather", "solarwindpy", "magnetic cloud"],
+    keywords=[
+        "solar",
+        "wind",
+        "space weather",
+        "solarwindpy",
+        "magnetic cloud",
+    ],
     classifiers=[
         "Development Status :: 1 - Planning",
         "Intended Audience :: Education",
