@@ -46,15 +46,19 @@ def test_get_cdf_data():
     """
     TODO: Add unit tests for the cases of empty Generic Series Objects (should we raise an exception?)
     """
-    print ('This is the espected result')
+    print("This is the espected result")
     fake_generic_series_object = FakeGenericTimeSeries(FAKE_DATAFRAME)
     with mock.patch(
         "heliopy.data.wind.mfi_h0", return_value=fake_generic_series_object
     ):
         fake_cdf_data = DataManager.get_gse_magnetic_vector(
-            Period(datetime(2021, 1, 1, 0, 0, 0), datetime(2021, 1, 1, 1, 0, 0))
+            Period(
+                datetime(2021, 1, 1, 0, 0, 0), datetime(2021, 1, 1, 1, 0, 0)
+            )
         )
     assert sorted(fake_cdf_data, key=lambda x: x.time) == sorted(
         EXPECTED_RESULT, key=lambda x: x.time
     )
+
+
 test_get_cdf_data()

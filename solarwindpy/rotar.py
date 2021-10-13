@@ -25,9 +25,9 @@ def calculo_gamma(phi, theta):
     """
     epsilon = 10e-15
     gamma = np.arctan(-np.tan(phi) / np.sin(theta + epsilon))
-    xmc_dot_xgse = np.cos(gamma) * np.sin(theta) * np.cos(phi) - np.sin(gamma) * np.sin(
-        phi
-    )
+    xmc_dot_xgse = np.cos(gamma) * np.sin(theta) * np.cos(phi) - np.sin(
+        gamma
+    ) * np.sin(phi)
     if xmc_dot_xgse < 0:
         gamma = np.arctan(-np.tan(phi) / np.sin(theta + epsilon)) + np.pi
         xmc_dot_xgse = np.cos(gamma) * np.sin(theta) * np.cos(phi) - np.sin(
@@ -45,11 +45,19 @@ def rotacion(x_gse, y_gse, z_gse, theta_deg, phi_deg):
     gamma = calculo_gamma(phi, theta)
     # building  the R matrix
     R = np.zeros((3, 3))
-    R[0][0] = np.cos(gamma) * np.sin(theta) * np.cos(phi) - np.sin(gamma) * np.sin(phi)
-    R[0][1] = np.cos(gamma) * np.sin(theta) * np.sin(phi) + np.sin(gamma) * np.cos(phi)
+    R[0][0] = np.cos(gamma) * np.sin(theta) * np.cos(phi) - np.sin(
+        gamma
+    ) * np.sin(phi)
+    R[0][1] = np.cos(gamma) * np.sin(theta) * np.sin(phi) + np.sin(
+        gamma
+    ) * np.cos(phi)
     R[0][2] = -np.cos(gamma) * np.cos(theta)
-    R[1][0] = -np.sin(gamma) * np.sin(theta) * np.cos(phi) - np.cos(gamma) * np.sin(phi)
-    R[1][1] = -np.sin(gamma) * np.sin(theta) * np.sin(phi) + np.cos(gamma) * np.cos(phi)
+    R[1][0] = -np.sin(gamma) * np.sin(theta) * np.cos(phi) - np.cos(
+        gamma
+    ) * np.sin(phi)
+    R[1][1] = -np.sin(gamma) * np.sin(theta) * np.sin(phi) + np.cos(
+        gamma
+    ) * np.cos(phi)
     R[1][2] = np.sin(gamma) * np.cos(theta)
     R[2][0] = np.cos(theta) * np.cos(phi)
     R[2][1] = np.cos(theta) * np.sin(phi)

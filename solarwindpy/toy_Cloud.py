@@ -4,9 +4,11 @@ Created on Mon Sep  6 20:07:03 2021
 
 @author: aguli
 """
+import matplotlib.pyplot as plt
 import numpy as np
 import scipy.special as sp
-import matplotlib.pyplot as plt
+
+from rotar import calculo_gamma as cg
 
 B0 = 10
 x1 = np.linspace(-2.38, 2.38, 100)
@@ -30,7 +32,6 @@ phi_deg = 45
 # from deg to radians
 theta = theta_deg * np.pi / 180.0
 phi = phi_deg * np.pi / 180
-from rotar import calculo_gamma as cg
 
 gamma = cg(phi, theta)
 # building  the R matrix
