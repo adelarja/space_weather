@@ -5,10 +5,12 @@ Created on Mon Sep  6 20:07:03 2021
 @author: aguli
 """
 import matplotlib.pyplot as plt
+
 import numpy as np
-import scipy.special as sp
 
 from rotar import calculo_gamma as cg
+
+import scipy.special as sp
 
 B0 = 10
 x1 = np.linspace(-2.38, 2.38, 100)
