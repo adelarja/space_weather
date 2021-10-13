@@ -38,8 +38,9 @@ import heliopy.data.wind as wind
 class Period:
     """Dataclass to manage the dates involved in the analysis.
 
-    TODO: Add some properties/setters to obtain relative dates. For example, to obtain relative dates from 'date_to',
-        receiving seconds, minutes, hours, days, months, etc. The same for date_from.
+    TODO: Add some properties/setters to obtain relative dates. For example,
+        to obtain relative dates from 'date_to', receiving seconds, minutes,
+        hours, days, months, etc. The same for date_from.
     """
 
     date_from: datetime
@@ -48,11 +49,12 @@ class Period:
 
 @dataclass
 class MagneticField:
-    """The aim of this dataclass, is to make it easier to perform the calculations when rotating or when doing any
-    process to the data.
+    """The aim of this dataclass, is to make it easier to perform the
+    calculations when rotating or when doing any process to the data.
 
-    Instead of working over a DataFrame row, we will work over a MagneticField (MagneticField has the data
-    corresponding to one row of the dataframe obtained using DataManager object).
+    Instead of working over a DataFrame row, we will work over a MagneticField
+    (MagneticField has the data corresponding to one row of the dataframe
+    obtained using DataManager object).
     """
 
     time: datetime
@@ -64,23 +66,28 @@ class MagneticField:
 class DataManager:
     @staticmethod
     def get_gse_magnetic_vector(period: Period) -> list[MagneticField]:
-        """This method retrieves the Magnetic Field Vector in Geocentric Solar Ecliptic System (GSE).
-
+        """This method retrieves the Magnetic Field Vector in Geocentric
+        Solar Ecliptic System (GSE).
 
         Args:
-            period (Period): A Period object with the dato_from and date_to information.
+            period (Period): A Period object with the dato_from and date_to
+            information.
 
 
         Returns:
-            A List of MagneticField objects that would be used to perform calculations.
+            A List of MagneticField objects that would be used to perform
+            calculations.
 
         Example:
             >>> date_from = datetime(2021, 1, 1, 0, 0, 0)
             >>> date_to = datetime(2021, 1, 1, 1, 0, 0)
             >>> data_period = Period(date_from, date_to)
-            >>> cdf_file_data = DataManager.get_gse_magnetic_vector(data_period)
+            >>> cdf_file_data = (
+                    DataManager.get_gse_magnetic_vector(data_period)
+                )
 
-        TODO: What happens if we don't retrieve any data? Or if we passed a date_from greater than date_to?
+        TODO: What happens if we don't retrieve any data? Or if we passed a
+           date_from greater than date_to?
         """
         cdf_data = wind.mfi_h0(period.date_from, period.date_to)
         cdf_data = cdf_data.to_dataframe()
@@ -108,9 +115,11 @@ class SolarWind:
         """
                 epsilon=1e-4;
         if gap>0,
-           cond_good=find(bx_gse_ext_<gap-epsilon & by_gse_ext_<gap-epsilon & bz_gse_ext_<gap-epsilon);
+           cond_good=find(bx_gse_ext_<gap-epsilon & by_gse_ext_<gap-epsilon
+               & bz_gse_ext_<gap-epsilon);
         elseif gap<0,
-           cond_good=find(bx_gse_ext_>gap+epsilon & by_gse_ext_>gap+epsilon & bz_gse_ext_>gap+epsilon);
+           cond_good=find(bx_gse_ext_>gap+epsilon & by_gse_ext_>gap+epsilon
+           & bz_gse_ext_>gap+epsilon);
         else
            'ERROR: gap flag cannot be zero'
         end
@@ -130,15 +139,20 @@ class SolarWind:
 
                 epsilon=1e-4;
         if gap>0,
-           cond_good=find(bx_gse_ext_<gap-epsilon & by_gse_ext_<gap-epsilon & ...
-           bz_gse_ext_<gap-epsilon & date_ext_>=initial_date & date_ext_<=end_date);
+           cond_good=find(bx_gse_ext_<gap-epsilon &
+           by_gse_ext_<gap-epsilon & ...
+           bz_gse_ext_<gap-epsilon & date_ext_>=initial_date
+           & date_ext_<=end_date);
         elseif gap<0,
-           cond_good=find(bx_gse_ext_>gap+epsilon & by_gse_ext_>gap+epsilon & ...
-           bz_gse_ext_>gap+epsilon & date_ext_>=initial_date & date_ext_<=end_date);
+           cond_good=find(bx_gse_ext_>gap+epsilon
+           & by_gse_ext_>gap+epsilon & ...
+           bz_gse_ext_>gap+epsilon & date_ext_>=initial_date
+           & date_ext_<=end_date);
         else
            'ERROR: gap flag cannot be zero'
         end
-        % Comment: for simplicity in notation define bi as b_gse_i (i=x,y,z)
+        % Comment: for simplicity in notation
+        define bi as b_gse_i (i=x,y,z)
         bx=bx_gse_ext_(cond_good);
         by=by_gse_ext_(cond_good);
         bz=bz_gse_ext_(cond_good);

@@ -29,7 +29,8 @@ EXPECTED_RESULT = [
 
 class FakeGenericTimeSeries:
     """
-    TODO: Maybe we can replace the Fake class by a Mock object with a method called to_dataframe.
+    TODO: Maybe we can replace the Fake class by a Mock object
+        with a method called to_dataframe.
     """
 
     def __init__(self, fake_dataframe):
@@ -44,7 +45,8 @@ class FakeGenericTimeSeries:
 
 def test_get_cdf_data():
     """
-    TODO: Add unit tests for the cases of empty Generic Series Objects (should we raise an exception?)
+    TODO: Add unit tests for the cases of empty Generic Series
+        Objects (should we raise an exception?)
     """
     print("This is the espected result")
     fake_generic_series_object = FakeGenericTimeSeries(FAKE_DATAFRAME)
