@@ -122,6 +122,44 @@ def calculate_minimum_variance(bx, by, bz):
     return minimum_variance_matrix
 
 
+def get_eigvals_and_eigvects(minimum_variance_matrix):
+    eigvals, eigvecs = la.eig(minimum_variance_matrix)
+    eigvals = eigvals.real
+    sorted_index = np.argsort(eigvals)
+
+    x_versor_nube = eigvecs[:, sorted_index[0]].reshape(3, 1)
+    z_versor_nube = eigvecs[:, sorted_index[1]].reshape(3, 1)
+    y_versor_nube = eigvecs[:, sorted_index[2]].reshape(3, 1)
+
+    bx_nube = bx * x_versor_nube[0] + by * x_versor_nube[1] + bz * x_versor_nube[2]
+    by_nube = bx * y_versor_nube[0] + by * y_versor_nube[1] + bz * y_versor_nube[2]
+    bz_nube = bx * z_versor_nube[0] + by * z_versor_nube[1] + bz * z_versor_nube[2]
+
+    NN = len(bz_nube) // 2
+    if bz_nube[NN - 1] < 0 and bz_nube[NN] < 0 and bz_nube[NN + 1] < 0:
+        z_versor_nube = -n_int
+        # z_nube
+        bx_nube = (
+                bx * x_versor_nube[0] + by * x_versor_nube[1] + bz * x_versor_nube[2]
+        )
+        by_nube = (
+                bx * y_versor_nube[0] + by * y_versor_nube[1] + bz * y_versor_nube[2]
+        )
+        bz_nube = (
+                bx * z_versor_nube[0] + by * z_versor_nube[1] + bz * z_versor_nube[2]
+        )
+
+    return bx_nube, by_nube, bz_nube
+
+
+def validate_cloud():
+    pass
+
+
+def get_rotation_angles():
+    pass
+
+
 minimum_variance_matrix = calculate_minimum_variance(bx, by, bz)
 
 
