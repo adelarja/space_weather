@@ -74,18 +74,6 @@ def rotation(x_gse, y_gse, z_gse, theta_deg, phi_deg):
     return x_mc, y_mc, z_mc
 
 
-##############################################################################
-# Here I loaded the components of B in gse coordinates for a toy_cloud to test
-# everything is working well
-##############################################################################
-
-bx = np.load("bx.npy")  # load bx in gse coordinates to test
-by = np.load("by.npy")  # load by in gse coordinates to test
-bz = np.load("bz.npy")  # load bz in gse coordinates to test
-
-
-kind_mv = 1  # kind_mv=1 if its used to orient Magnetic Clouds
-
 # Here I compute de Minimum Variance Matrix for the B components
 # in GSE coordinates
 ####################################################
@@ -122,7 +110,7 @@ def calculate_minimum_variance(bx, by, bz):
     return minimum_variance_matrix
 
 
-def get_eigvals_and_eigvects(minimum_variance_matrix):
+def get_eigvals_and_eigvects(bx, by, bz, minimum_variance_matrix):
     eigvals, eigvecs = la.eig(minimum_variance_matrix)
     eigvals = eigvals.real
     sorted_index = np.argsort(eigvals)
@@ -137,17 +125,49 @@ def get_eigvals_and_eigvects(minimum_variance_matrix):
 
     NN = len(bz_nube) // 2
     if bz_nube[NN - 1] < 0 and bz_nube[NN] < 0 and bz_nube[NN + 1] < 0:
-        z_versor_nube = -n_int
-        # z_nube
-        bx_nube = (
-                bx * x_versor_nube[0] + by * x_versor_nube[1] + bz * x_versor_nube[2]
-        )
-        by_nube = (
-                bx * y_versor_nube[0] + by * y_versor_nube[1] + bz * y_versor_nube[2]
-        )
+        z_versor_nube = -z_versor_nube
         bz_nube = (
                 bx * z_versor_nube[0] + by * z_versor_nube[1] + bz * z_versor_nube[2]
         )
+
+    mod_alfa = np.arccos(x_versor_nube[0]) * 180 / np.pi
+    if mod_alfa < 85:
+        print("Def. of x_versor_nube is Ok.")
+    if mod_alfa > 85:
+        print("Def. of x_versor_nube is OPOSITE. INVERSE SIGN")
+        x_versor_nube = -x_versor_nube
+        # r
+        bx_nube = (
+                bx * x_versor_nube[0] + by * x_versor_nube[1] + bz * x_versor_nube[2]
+        )
+        mod_alfa = np.acos(x_versor_nube[0]) * 180 / np.pi
+        if mod_alfa >= 85:
+            raise ValueError(
+                "ERROR:change sgn x_versor didn´t do x_cloud=r(out_bound)"
+            )
+        else:
+            raise ValueError("ERROR alfa GIVES near 90 degrees")
+
+    MM_provi = np.ones((3, 3))
+    MM_provi[0, :] = x_versor_nube.reshape(1, 3)
+    MM_provi[1, :] = y_versor_nube.reshape(1, 3)
+    MM_provi[2, :] = z_versor_nube.reshape(1, 3)
+    MM_provi_det = np.linalg.det(MM_provi)
+    if abs(MM_provi_det - 1) < 1e-10:  # MM_provi_det == +1
+        print("Def. d y_versor_nube Ok.")
+    if abs(MM_provi_det + 1) < 1e-10:  # MM_provi_det == -1
+        print("Def.  y_versor_nube inverted. Sign changed.")
+        y_versor_nube = -y_versor_nube
+        # phi or y_mc
+        by_nube = (
+                bx * y_versor_nube[0] + by * y_versor_nube[1] + bz * y_versor_nube[2]
+        )
+        MM_provi[0, :] = x_versor_nube.reshape(1, 3)
+        MM_provi[1, :] = y_versor_nube.reshape(1, 3)
+        MM_provi[2, :] = z_versor_nube.reshape(1, 3)
+        MM_provi_det = np.linalg.det(MM_provi)
+        if abs(MM_provi_det - 1) > 1e-10:
+            raise ValueError("ERROR: The change to righ hand-handed didnit work")
 
     return bx_nube, by_nube, bz_nube
 
@@ -158,6 +178,19 @@ def validate_cloud():
 
 def get_rotation_angles():
     pass
+
+
+##############################################################################
+# Here I loaded the components of B in gse coordinates for a toy_cloud to test
+# everything is working well
+##############################################################################
+
+bx = np.load("bx.npy")  # load bx in gse coordinates to test
+by = np.load("by.npy")  # load by in gse coordinates to test
+bz = np.load("bz.npy")  # load bz in gse coordinates to test
+
+
+kind_mv = 1  # kind_mv=1 if its used to orient Magnetic Clouds
 
 
 minimum_variance_matrix = calculate_minimum_variance(bx, by, bz)
