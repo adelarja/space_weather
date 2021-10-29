@@ -172,6 +172,16 @@ def get_eigvals_and_eigvects(bx, by, bz, minimum_variance_matrix):
     return bx_nube, by_nube, bz_nube
 
 
+def get_main_versor(kind_mv, x_versor_nube, z_versor_nube):
+    if kind_mv == 1:
+        main_versor = z_versor_nube
+    elif kind_mv == 2:
+        main_versor = x_versor_nube
+    else:
+        raise ValueError("kind_mv needs to be 1 or 2")
+    return main_versor
+
+
 def validate_cloud():
     pass
 
@@ -349,12 +359,7 @@ if abs(MM_provi_det + 1) < 1e-10:  # MM_provi_det == -1
 #################################################################
 
 
-if kind_mv == 1:
-    main_versor = z_versor_nube
-elif kind_mv == 2:
-    main_versor = x_versor_nube
-else:
-    raise ValueError("kind_mv needs to be 1 or 2")
+main_versor = get_main_versor(kind_mv, x_versor_nube, z_versor_nube)
 
 
 ############################################################################
