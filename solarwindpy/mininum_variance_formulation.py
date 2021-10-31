@@ -7,6 +7,8 @@ Created on Sun Oct 10 10:32:58 2021
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.linalg as la
+from wind import Period, DataManager, MagneticField
+from datetime import datetime
 
 #############################################################################
 # Here I define some useful funtions to calculate the third grade of liberty
@@ -140,7 +142,7 @@ def get_eigvals_and_eigvects(bx, by, bz, minimum_variance_matrix):
         bx_nube = (
                 bx * x_versor_nube[0] + by * x_versor_nube[1] + bz * x_versor_nube[2]
         )
-        mod_alfa = np.acos(x_versor_nube[0]) * 180 / np.pi
+        mod_alfa = np.arccos(x_versor_nube[0]) * 180 / np.pi
         if mod_alfa >= 85:
             raise ValueError(
                 "ERROR:change sgn x_versor didn´t do x_cloud=r(out_bound)"
@@ -169,7 +171,42 @@ def get_eigvals_and_eigvects(bx, by, bz, minimum_variance_matrix):
         if abs(MM_provi_det - 1) > 1e-10:
             raise ValueError("ERROR: The change to righ hand-handed didnit work")
 
-    return bx_nube, by_nube, bz_nube
+    main_versor = get_main_versor(1, x_versor_nube, z_versor_nube)
+
+    theta_monio_min_var = np.arccos(main_versor[2]) * 180 / np.pi
+    theta_min_var = 90 - theta_monio_min_var
+
+    mod = np.sqrt(main_versor[0] ** 2 + main_versor[1] ** 2)
+    p_zn_eclip_versor_x_gse = main_versor[0] / mod
+    p_zn_eclip_versor_y_gse = main_versor[1] / mod
+    cos_de_phi_min_var = p_zn_eclip_versor_x_gse
+    sin_de_phi_min_var = p_zn_eclip_versor_y_gse
+
+    print(
+        '\phi (between "proyection Mc axis to the ecliptic plane" , "axis x_GSE"'
+    )
+    if sin_de_phi_min_var > 0 and cos_de_phi_min_var > 0:
+        cuadrante = 1
+        print("first cuadrant (0,90)")
+        phi_min_var = np.arccos(cos_de_phi_min_var) * 180 / np.pi
+    elif sin_de_phi_min_var > 0 and cos_de_phi_min_var < 0:
+        cuadrante = 2
+        print("second Cuadrant (90,180)")
+        phi_min_var = np.arccos(cos_de_phi_min_var) * 180 / np.pi
+    elif sin_de_phi_min_var < 0 and cos_de_phi_min_var < 0:
+        cuadrante = 3
+        print("Third Cuadrant (180,270)")
+        phi_min_var = 360 - np.arccos(cos_de_phi_min_var) * 180 / np.pi
+    elif sin_de_phi_min_var < 0 and cos_de_phi_min_var > 0:
+        cuadrante = 4
+        print("Forth Cuadrant (270,360)")
+        phi_min_var = 360 - np.arccos(cos_de_phi_min_var) * 180 / np.pi
+    else:
+        raise ValueError("can not determine cuadrant Error")
+
+    bx_n, by_n, bz_n = rotation(bx, by, bz, theta_min_var, phi_min_var)
+
+    return bx_n, by_n, bz_n
 
 
 def get_main_versor(kind_mv, x_versor_nube, z_versor_nube):
@@ -182,6 +219,51 @@ def get_main_versor(kind_mv, x_versor_nube, z_versor_nube):
     return main_versor
 
 
+def rotate_magnetic_field_using_angles(bx, by, bz, minimum_variance_matrix):
+    eigvals, eigvecs = la.eig(minimum_variance_matrix)
+    eigvals = eigvals.real
+    sorted_index = np.argsort(eigvals)
+
+    x_versor_nube = eigvecs[:, sorted_index[0]].reshape(3, 1)
+    z_versor_nube = eigvecs[:, sorted_index[1]].reshape(3, 1)
+    y_versor_nube = eigvecs[:, sorted_index[2]].reshape(3, 1)
+
+    main_versor = get_main_versor(1, x_versor_nube, z_versor_nube)
+
+    theta_monio_min_var = np.arccos(main_versor[2]) * 180 / np.pi
+    theta_min_var = 90 - theta_monio_min_var
+
+    mod = np.sqrt(main_versor[0] ** 2 + main_versor[1] ** 2)
+    p_zn_eclip_versor_x_gse = main_versor[0] / mod
+    p_zn_eclip_versor_y_gse = main_versor[1] / mod
+    cos_de_phi_min_var = p_zn_eclip_versor_x_gse
+    sin_de_phi_min_var = p_zn_eclip_versor_y_gse
+
+    print(
+        '\phi (between "proyection Mc axis to the ecliptic plane" , "axis x_GSE"'
+    )
+    if sin_de_phi_min_var > 0 and cos_de_phi_min_var > 0:
+        cuadrante = 1
+        print("first cuadrant (0,90)")
+        phi_min_var = np.arccos(cos_de_phi_min_var) * 180 / np.pi
+    elif sin_de_phi_min_var > 0 and cos_de_phi_min_var < 0:
+        cuadrante = 2
+        print("second Cuadrant (90,180)")
+        phi_min_var = np.arccos(cos_de_phi_min_var) * 180 / np.pi
+    elif sin_de_phi_min_var < 0 and cos_de_phi_min_var < 0:
+        cuadrante = 3
+        print("Third Cuadrant (180,270)")
+        phi_min_var = 360 - np.arccos(cos_de_phi_min_var) * 180 / np.pi
+    elif sin_de_phi_min_var < 0 and cos_de_phi_min_var > 0:
+        cuadrante = 4
+        print("Forth Cuadrant (270,360)")
+        phi_min_var = 360 - np.arccos(cos_de_phi_min_var) * 180 / np.pi
+    else:
+        raise ValueError("can not determine cuadrant Error")
+
+    return rotation(bx, by, bz, theta_min_var, phi_min_var)
+
+
 def validate_cloud():
     pass
 
@@ -190,16 +272,21 @@ def get_rotation_angles():
     pass
 
 
-##############################################################################
-# Here I loaded the components of B in gse coordinates for a toy_cloud to test
-# everything is working well
-##############################################################################
-
-bx = np.load("bx.npy")  # load bx in gse coordinates to test
-by = np.load("by.npy")  # load by in gse coordinates to test
-bz = np.load("bz.npy")  # load bz in gse coordinates to test
+def not_nan_neither_inf(magnetic_field: MagneticField):
+    invalid_gse0 = np.isnan(magnetic_field.bgse0) or np.isinf(magnetic_field.bgse0)
+    invalid_gse1 = np.isnan(magnetic_field.bgse1) or np.isinf(magnetic_field.bgse1)
+    invalid_gse2 = np.isnan(magnetic_field.bgse2) or np.isinf(magnetic_field.bgse2)
+    return not any([invalid_gse0, invalid_gse1, invalid_gse2])
 
 
+date_from = datetime(2021, 1, 1, 0, 0, 0)
+date_to = datetime(2021, 1, 2, 0, 0, 0)
+date_period = Period(date_from, date_to)
+cdf_data = DataManager.get_gse_magnetic_vector(date_period)
+cdf_data = [magnetic_field for magnetic_field in cdf_data if not_nan_neither_inf(magnetic_field)]
+bx = np.array([magnetic_field.bgse0 for magnetic_field in cdf_data])
+by = np.array([magnetic_field.bgse1 for magnetic_field in cdf_data])
+bz = np.array([magnetic_field.bgse2 for magnetic_field in cdf_data])
 kind_mv = 1  # kind_mv=1 if its used to orient Magnetic Clouds
 
 
@@ -265,7 +352,12 @@ z_versor_nube = n_int
 bx_nube = bx * x_versor_nube[0] + by * x_versor_nube[1] + bz * x_versor_nube[2]
 by_nube = bx * y_versor_nube[0] + by * y_versor_nube[1] + bz * y_versor_nube[2]
 bz_nube = bx * z_versor_nube[0] + by * z_versor_nube[1] + bz * z_versor_nube[2]
-
+print("BX #####################")
+print(bx)
+print("BY #####################")
+print(by)
+print("BZ #####################")
+print(bz)
 
 #########################################################################
 # Here I
@@ -286,7 +378,6 @@ if bz_nube[NN - 1] < 0 and bz_nube[NN] < 0 and bz_nube[NN + 1] < 0:
         bx * z_versor_nube[0] + by * z_versor_nube[1] + bz * z_versor_nube[2]
     )
     print("z_versor_nube es-n_int")
-
 #######################################################
 # Here I Check that  x_versor_nube sign: x_cloud=r(out_bound)
 #######################################################
@@ -314,7 +405,7 @@ if mod_alfa > 85:
     bz_nube = (
         bx * z_versor_nube[0] + by * z_versor_nube[1] + bz * z_versor_nube[2]
     )
-    mod_alfa = np.acos(x_versor_nube[0]) * 180 / np.pi
+    mod_alfa = np.arccos(x_versor_nube[0]) * 180 / np.pi
     if mod_alfa >= 85:
         raise ValueError(
             "ERROR:change sgn x_versor didn´t do x_cloud=r(out_bound)"
