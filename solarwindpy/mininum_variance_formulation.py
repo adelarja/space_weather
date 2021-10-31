@@ -10,6 +10,81 @@ import scipy.linalg as la
 from wind import Period, DataManager, MagneticField
 from datetime import datetime
 
+
+class RotatedWind:
+
+    def __init__(self, bgse0, bgse1, bgse2):
+        self.bgse0 = bgse0
+        self.bgse1 = bgse1
+        self.bgse2 = bgse2
+
+    @classmethod
+    def get_rotated_wind(cls, wind: list[MagneticField]):
+        bx = np.array([magnetic_field.bgse0 for magnetic_field in wind])
+        by = np.array([magnetic_field.bgse1 for magnetic_field in wind])
+        bz = np.array([magnetic_field.bgse2 for magnetic_field in wind])
+
+        minimum_variance_matrix = calculate_minimum_variance(bx, by, bz)
+        eigvals, eigvecs = la.eig(minimum_variance_matrix)
+        eigvals = eigvals.real
+        sorted_index = np.argsort(eigvals)
+
+        x_versor_nube = eigvecs[:, sorted_index[0]].reshape(3, 1)
+        z_versor_nube = eigvecs[:, sorted_index[1]].reshape(3, 1)
+        y_versor_nube = eigvecs[:, sorted_index[2]].reshape(3, 1)
+
+        bx_nube = bx * x_versor_nube[0] + by * x_versor_nube[1] + bz * x_versor_nube[2]
+        by_nube = bx * y_versor_nube[0] + by * y_versor_nube[1] + bz * y_versor_nube[2]
+        bz_nube = bx * z_versor_nube[0] + by * z_versor_nube[1] + bz * z_versor_nube[2]
+
+        NN = len(bz_nube) // 2
+        if bz_nube[NN - 1] < 0 and bz_nube[NN] < 0 and bz_nube[NN + 1] < 0:
+            z_versor_nube = -z_versor_nube
+            bz_nube = (
+                    bx * z_versor_nube[0] + by * z_versor_nube[1] + bz * z_versor_nube[2]
+            )
+
+        mod_alfa = np.arccos(x_versor_nube[0]) * 180 / np.pi
+        if mod_alfa < 85:
+            print("Def. of x_versor_nube is Ok.")
+        if mod_alfa > 85:
+            print("Def. of x_versor_nube is OPOSITE. INVERSE SIGN")
+            x_versor_nube = -x_versor_nube
+            # r
+            bx_nube = (
+                    bx * x_versor_nube[0] + by * x_versor_nube[1] + bz * x_versor_nube[2]
+            )
+            mod_alfa = np.arccos(x_versor_nube[0]) * 180 / np.pi
+            if mod_alfa >= 85:
+                raise ValueError(
+                    "ERROR:change sgn x_versor didn´t do x_cloud=r(out_bound)"
+                )
+            else:
+                raise ValueError("ERROR alfa GIVES near 90 degrees")
+
+        MM_provi = np.ones((3, 3))
+        MM_provi[0, :] = x_versor_nube.reshape(1, 3)
+        MM_provi[1, :] = y_versor_nube.reshape(1, 3)
+        MM_provi[2, :] = z_versor_nube.reshape(1, 3)
+        MM_provi_det = np.linalg.det(MM_provi)
+        if abs(MM_provi_det - 1) < 1e-10:  # MM_provi_det == +1
+            print("Def. d y_versor_nube Ok.")
+        if abs(MM_provi_det + 1) < 1e-10:  # MM_provi_det == -1
+            print("Def.  y_versor_nube inverted. Sign changed.")
+            y_versor_nube = -y_versor_nube
+            # phi or y_mc
+            by_nube = (
+                    bx * y_versor_nube[0] + by * y_versor_nube[1] + bz * y_versor_nube[2]
+            )
+            MM_provi[0, :] = x_versor_nube.reshape(1, 3)
+            MM_provi[1, :] = y_versor_nube.reshape(1, 3)
+            MM_provi[2, :] = z_versor_nube.reshape(1, 3)
+            MM_provi_det = np.linalg.det(MM_provi)
+            if abs(MM_provi_det - 1) > 1e-10:
+                raise ValueError("ERROR: The change to righ hand-handed didnit work")
+
+        return cls(bx_nube, by_nube, bz_nube)
+
 #############################################################################
 # Here I define some useful funtions to calculate the third grade of liberty
 # for the Euler rotation given phi and theta angles, but chosen this third
@@ -539,7 +614,7 @@ plt.figure(1)
 plt.plot(by)
 plt.plot(bz)
 plt.plot(bx)
-
+plt.show()
 ###################################################################
 # Here I plot B in Magnetic cloud frame from the MV definitive variance
 # Matrix
@@ -548,7 +623,7 @@ plt.figure(2)
 plt.plot(by_mc)
 plt.plot(bz_mc)
 plt.plot(bx_mc)
-
+plt.show()
 #######################################################################
 # Here I plot B in Magnetic Cloud frame from the angles calculated
 # from the matrix eigen value and eigen problem
@@ -558,3 +633,4 @@ plt.figure(3)
 plt.plot(by_nube)
 plt.plot(bz_nube)
 plt.plot(bx_nube)
+plt.show()
