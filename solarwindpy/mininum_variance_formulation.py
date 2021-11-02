@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sun Oct 10 10:32:58 2021
+# This file is part of the
+#  solarwindpy (hhttps://github.com/adelarja/space_weather/).
+# Copyright (c) 2021, Adriana Gulisano
+# License: BSD 3-Clause
+#   Full Text: https://github.com/adelarja/space_weather/blob/main/LICENSE
 
 @author: aguli
 """
