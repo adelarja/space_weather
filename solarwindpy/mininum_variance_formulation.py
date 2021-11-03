@@ -38,10 +38,16 @@ def calculate_minimum_variance(bx, by, bz):
 
 def correct_bz(wind_bz, wind_z_versor, bx, by, bz):
     middle_element_index = len(wind_bz) // 2
-    if wind_bz[middle_element_index - 1] < 0 and wind_bz[middle_element_index] < 0 and wind_bz[middle_element_index + 1] < 0:
+    if (
+        wind_bz[middle_element_index - 1] < 0
+        and wind_bz[middle_element_index] < 0
+        and wind_bz[middle_element_index + 1] < 0
+    ):
         wind_z_versor = -wind_z_versor
         wind_bz = (
-                bx * wind_z_versor[0] + by * wind_z_versor[1] + bz * wind_z_versor[2]
+            bx * wind_z_versor[0]
+            + by * wind_z_versor[1]
+            + bz * wind_z_versor[2]
         )
     return wind_bz, wind_z_versor
 
@@ -52,7 +58,9 @@ def correct_bx(wind_bx, wind_x_versor, bx, by, bz):
         wind_x_versor = -wind_x_versor
         # TODO Here we are always raising an exception. Is that OK?
         wind_bx = (
-                bx * wind_x_versor[0] + by * wind_x_versor[1] + bz * wind_x_versor[2]
+            bx * wind_x_versor[0]
+            + by * wind_x_versor[1]
+            + bz * wind_x_versor[2]
         )
         mod_alfa = np.arccos(wind_x_versor[0]) * 180 / np.pi
         if mod_alfa >= 85:
@@ -65,20 +73,32 @@ def correct_bx(wind_bx, wind_x_versor, bx, by, bz):
     return wind_bx, wind_x_versor
 
 
-def correct_by(wind_by, wind_y_versor, wind_x_versor, wind_z_versor, bx, by, bz):
-    transposed_matrix_determinant = get_transposed_matrix_determinant(wind_x_versor, wind_y_versor, wind_z_versor)
+def correct_by(
+    wind_by, wind_y_versor, wind_x_versor, wind_z_versor, bx, by, bz
+):
+    transposed_matrix_determinant = get_transposed_matrix_determinant(
+        wind_x_versor, wind_y_versor, wind_z_versor
+    )
     if abs(transposed_matrix_determinant + 1) < 1e-10:  # MM_provi_det == -1
         wind_y_versor = -wind_y_versor
         wind_by = (
-                bx * wind_y_versor[0] + by * wind_y_versor[1] + bz * wind_y_versor[2]
+            bx * wind_y_versor[0]
+            + by * wind_y_versor[1]
+            + bz * wind_y_versor[2]
         )
-        transposed_matrix_determinant = get_transposed_matrix_determinant(wind_x_versor, wind_y_versor, wind_z_versor)
+        transposed_matrix_determinant = get_transposed_matrix_determinant(
+            wind_x_versor, wind_y_versor, wind_z_versor
+        )
         if abs(transposed_matrix_determinant - 1) > 1e-10:
-            raise ValueError("ERROR: The change to righ hand-handed didnit work")
+            raise ValueError(
+                "ERROR: The change to righ hand-handed didnit work"
+            )
     return wind_by, wind_y_versor
 
 
-def get_transposed_matrix_determinant(wind_x_versor, wind_y_versor, wind_z_versor):
+def get_transposed_matrix_determinant(
+    wind_x_versor, wind_y_versor, wind_z_versor
+):
     transposed_matrix = np.ones((3, 3))
     transposed_matrix[0, :] = wind_x_versor.reshape(1, 3)
     transposed_matrix[1, :] = wind_y_versor.reshape(1, 3)
@@ -149,7 +169,6 @@ def get_main_versor(kind_mv, x_versor_nube, z_versor_nube):
 
 
 class RotatedWind:
-
     def __init__(self, bgse0, bgse1, bgse2):
         self.bgse0 = bgse0
         self.bgse1 = bgse1
@@ -170,13 +189,26 @@ class RotatedWind:
         wind_z_versor = eigvecs[:, sorted_index[1]].reshape(3, 1)
         wind_y_versor = eigvecs[:, sorted_index[2]].reshape(3, 1)
 
-        wind_bx = bx * wind_x_versor[0] + by * wind_x_versor[1] + bz * wind_x_versor[2]
-        wind_by = bx * wind_y_versor[0] + by * wind_y_versor[1] + bz * wind_y_versor[2]
-        wind_bz = bx * wind_z_versor[0] + by * wind_z_versor[1] + bz * wind_z_versor[2]
+        wind_bx = (
+            bx * wind_x_versor[0]
+            + by * wind_x_versor[1]
+            + bz * wind_x_versor[2]
+        )
+        wind_by = (
+            bx * wind_y_versor[0]
+            + by * wind_y_versor[1]
+            + bz * wind_y_versor[2]
+        )
+        wind_bz = (
+            bx * wind_z_versor[0]
+            + by * wind_z_versor[1]
+            + bz * wind_z_versor[2]
+        )
 
         wind_bx, wind_x_versor = correct_bx(wind_bx, wind_x_versor, bx, by, bz)
         wind_bz, wind_z_versor = correct_bz(wind_bz, wind_z_versor, bx, by, bz)
-        wind_by, wind_y_versor = correct_by(wind_by, wind_y_versor, wind_x_versor, wind_z_versor, bx, by, bz)
+        wind_by, wind_y_versor = correct_by(
+            wind_by, wind_y_versor, wind_x_versor, wind_z_versor, bx, by, bz
+        )
 
         return cls(wind_bx, wind_by, wind_bz)
-
