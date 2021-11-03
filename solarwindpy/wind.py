@@ -30,6 +30,7 @@ import cdflib
 import heliopy.data.wind as wind
 
 import numpy as np
+
 # ============================================================================
 # CLASSES
 # ============================================================================
@@ -65,9 +66,15 @@ class MagneticField:
 
 
 def not_nan_neither_inf(magnetic_field: MagneticField):
-    invalid_gse0 = np.isnan(magnetic_field.bgse0) or np.isinf(magnetic_field.bgse0)
-    invalid_gse1 = np.isnan(magnetic_field.bgse1) or np.isinf(magnetic_field.bgse1)
-    invalid_gse2 = np.isnan(magnetic_field.bgse2) or np.isinf(magnetic_field.bgse2)
+    invalid_gse0 = np.isnan(magnetic_field.bgse0) or np.isinf(
+        magnetic_field.bgse0
+    )
+    invalid_gse1 = np.isnan(magnetic_field.bgse1) or np.isinf(
+        magnetic_field.bgse1
+    )
+    invalid_gse2 = np.isnan(magnetic_field.bgse2) or np.isinf(
+        magnetic_field.bgse2
+    )
     return not any([invalid_gse0, invalid_gse1, invalid_gse2])
 
 
@@ -112,7 +119,9 @@ class DataManager:
         ]
 
     @staticmethod
-    def filter_nan_and_inf_values(magnetic_fields_data: list[MagneticField]) -> list[MagneticField]:
+    def filter_nan_and_inf_values(
+        magnetic_fields_data: list[MagneticField],
+    ) -> list[MagneticField]:
         """Filter the nan and inf components in the magnetic field elements.
 
         If any of the components has an inf or nan value, the entire
