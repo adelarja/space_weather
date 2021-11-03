@@ -2,7 +2,9 @@ from datetime import datetime
 from unittest import mock
 
 import pandas as pd
+import pytest
 from pandas import Timestamp
+import numpy as np
 
 from solarwindpy.wind import DataManager, MagneticField, Period
 
@@ -20,7 +22,17 @@ FAKE_DATAFRAME = pd.DataFrame(
     }
 ).set_index("Time")
 
-EXPECTED_RESULT = [
+EXPECTED_CDF_RESULT = [
+    MagneticField(Timestamp(2021, 1, 1, 0, 0, 0), 1.0, 2.0, 3.0),
+    MagneticField(Timestamp(2021, 1, 1, 0, 30, 0), -1.0, -2.0, -3.0),
+    MagneticField(Timestamp(2021, 1, 1, 1, 0, 0), 0.0, 1.0, 2.0),
+]
+
+FAKE_MAGNETIC_FIELDS = [
+    MagneticField(Timestamp(2021, 1, 1, 0, 0, 0), np.inf, 2.0, 3.0),
+    MagneticField(Timestamp(2021, 1, 1, 0, 30, 0), np.inf, np.inf, np.inf),
+    MagneticField(Timestamp(2021, 1, 1, 0, 30, 0), np.nan, -2.0, -3.0),
+    MagneticField(Timestamp(2021, 1, 1, 0, 30, 0), np.nan, np.nan, np.nan),
     MagneticField(Timestamp(2021, 1, 1, 0, 0, 0), 1.0, 2.0, 3.0),
     MagneticField(Timestamp(2021, 1, 1, 0, 30, 0), -1.0, -2.0, -3.0),
     MagneticField(Timestamp(2021, 1, 1, 1, 0, 0), 0.0, 1.0, 2.0),
@@ -48,7 +60,6 @@ def test_get_cdf_data():
     TODO: Add unit tests for the cases of empty Generic Series
         Objects (should we raise an exception?)
     """
-    print("This is the espected result")
     fake_generic_series_object = FakeGenericTimeSeries(FAKE_DATAFRAME)
     with mock.patch(
         "heliopy.data.wind.mfi_h0", return_value=fake_generic_series_object
@@ -59,8 +70,12 @@ def test_get_cdf_data():
             )
         )
     assert sorted(fake_cdf_data, key=lambda x: x.time) == sorted(
-        EXPECTED_RESULT, key=lambda x: x.time
+        EXPECTED_CDF_RESULT, key=lambda x: x.time
     )
 
 
-test_get_cdf_data()
+def test_filter_nan_and_inf_values():
+    assert (
+        DataManager.filter_nan_and_inf_values(FAKE_MAGNETIC_FIELDS)
+        == EXPECTED_CDF_RESULT
+    )
