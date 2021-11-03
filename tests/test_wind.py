@@ -1,10 +1,10 @@
 from datetime import datetime
 from unittest import mock
 
-import pandas as pd
-import pytest
-from pandas import Timestamp
 import numpy as np
+
+import pandas as pd
+from pandas import Timestamp
 
 from solarwindpy.wind import DataManager, MagneticField, Period
 

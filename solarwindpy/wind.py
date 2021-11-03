@@ -7,8 +7,6 @@
 from dataclasses import dataclass
 from datetime import datetime
 
-import cdflib
-
 import heliopy.data.wind as wind
 
 import numpy as np

@@ -5,7 +5,9 @@ Created on Sun Oct 10 10:32:58 2021
 @author: aguli
 """
 import numpy as np
+
 import scipy.linalg as la
+
 from wind import MagneticField
 
 
