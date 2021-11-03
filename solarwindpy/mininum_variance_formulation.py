@@ -58,7 +58,6 @@ def correct_bx(wind_bx, wind_x_versor, bx, by, bz):
     mod_alfa = np.arccos(wind_x_versor[0]) * 180 / np.pi
     if mod_alfa > 85:
         wind_x_versor = -wind_x_versor
-        # TODO Here we are always raising an exception. Is that OK?
         wind_bx = (
             bx * wind_x_versor[0]
             + by * wind_x_versor[1]
@@ -69,9 +68,6 @@ def correct_bx(wind_bx, wind_x_versor, bx, by, bz):
             raise ValueError(
                 "ERROR:change sgn x_versor didn´t do x_cloud=r(out_bound)"
             )
-        # TODO Check if this else is OK.
-        else:
-            raise ValueError("ERROR alfa GIVES near 90 degrees")
     return wind_bx, wind_x_versor
 
 

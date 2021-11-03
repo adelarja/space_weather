@@ -610,6 +610,20 @@ bz_mc = (
 ##################################################################
 # Here I plot B in gse coordinates
 ##################################################################
+fig, axs = plt.subplots(3)
+axs[0].plot(by)
+axs[0].plot(bz)
+axs[0].plot(bx)
+
+axs[1].plot(by_mc)
+axs[1].plot(bz_mc)
+axs[1].plot(bx_mc)
+
+axs[2].plot(by_nube)
+axs[2].plot(bz_nube)
+axs[2].plot(bx_nube)
+plt.show()
+
 plt.figure(1)
 plt.plot(by)
 plt.plot(bz)
