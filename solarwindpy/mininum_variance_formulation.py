@@ -91,7 +91,9 @@ def correct_by(
             raise ValueError(
                 "ERROR: The change to righ hand-handed didnit work"
             )
-    transposed_matrix = get_transposed_matrix(wind_x_versor, wind_y_versor, wind_z_versor)
+    transposed_matrix = get_transposed_matrix(
+        wind_x_versor, wind_y_versor, wind_z_versor
+    )
 
     return wind_by, wind_y_versor, transposed_matrix
 
@@ -107,7 +109,9 @@ def get_transposed_matrix(wind_x_versor, wind_y_versor, wind_z_versor):
 def get_transposed_matrix_determinant(
     wind_x_versor, wind_y_versor, wind_z_versor
 ):
-    transposed_matrix = get_transposed_matrix(wind_x_versor, wind_y_versor, wind_z_versor)
+    transposed_matrix = get_transposed_matrix(
+        wind_x_versor, wind_y_versor, wind_z_versor
+    )
     transposed_matrix_determinant = np.linalg.det(transposed_matrix)
     return transposed_matrix_determinant
 
@@ -219,7 +223,9 @@ class RotatedWind:
         return cls(wind_bx, wind_by, wind_bz)
 
     @classmethod
-    def get_rotated_wind_using_transposed_matrix(cls, wind: list[MagneticField]):
+    def get_rotated_wind_using_transposed_matrix(
+        cls, wind: list[MagneticField]
+    ):
         bx = np.array([magnetic_field.bgse0 for magnetic_field in wind])
         by = np.array([magnetic_field.bgse1 for magnetic_field in wind])
         bz = np.array([magnetic_field.bgse2 for magnetic_field in wind])
@@ -234,19 +240,19 @@ class RotatedWind:
         wind_y_versor = eigvecs[:, sorted_index[2]].reshape(3, 1)
 
         wind_bx = (
-                bx * wind_x_versor[0]
-                + by * wind_x_versor[1]
-                + bz * wind_x_versor[2]
+            bx * wind_x_versor[0]
+            + by * wind_x_versor[1]
+            + bz * wind_x_versor[2]
         )
         wind_by = (
-                bx * wind_y_versor[0]
-                + by * wind_y_versor[1]
-                + bz * wind_y_versor[2]
+            bx * wind_y_versor[0]
+            + by * wind_y_versor[1]
+            + bz * wind_y_versor[2]
         )
         wind_bz = (
-                bx * wind_z_versor[0]
-                + by * wind_z_versor[1]
-                + bz * wind_z_versor[2]
+            bx * wind_z_versor[0]
+            + by * wind_z_versor[1]
+            + bz * wind_z_versor[2]
         )
 
         wind_bx, wind_x_versor = correct_bx(wind_bx, wind_x_versor, bx, by, bz)
@@ -256,19 +262,19 @@ class RotatedWind:
         )
 
         rotated_bx = (
-                transposed_matrix[0][0] * bx
-                + transposed_matrix[0][1] * by
-                + transposed_matrix[0][2] * bz
+            transposed_matrix[0][0] * bx
+            + transposed_matrix[0][1] * by
+            + transposed_matrix[0][2] * bz
         )
         rotated_by = (
-                transposed_matrix[1][0] * bx
-                + transposed_matrix[1][1] * by
-                + transposed_matrix[1][2] * bz
+            transposed_matrix[1][0] * bx
+            + transposed_matrix[1][1] * by
+            + transposed_matrix[1][2] * bz
         )
         rotated_bz = (
-                transposed_matrix[2][0] * bx
-                + transposed_matrix[2][1] * by
-                + transposed_matrix[2][2] * bz
+            transposed_matrix[2][0] * bx
+            + transposed_matrix[2][1] * by
+            + transposed_matrix[2][2] * bz
         )
 
         return cls(rotated_bx, rotated_by, rotated_bz)
