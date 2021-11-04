@@ -315,7 +315,7 @@ class RotatedWind:
         if sin_de_phi_min_var > 0 and cos_de_phi_min_var > 0:
             phi_min_var = np.arccos(cos_de_phi_min_var) * 180 / np.pi
         # TODO We have two elifs checking the same condition. Should we
-        #  remove one?
+        #  remove one? (sin_de_phi_min_var > 0 and cos_de_phi_min_var < 0)
         elif sin_de_phi_min_var > 0 and cos_de_phi_min_var < 0:
             phi_min_var = np.arccos(cos_de_phi_min_var) * 180 / np.pi
         elif sin_de_phi_min_var < 0 and cos_de_phi_min_var < 0:
