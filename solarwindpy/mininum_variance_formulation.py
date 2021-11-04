@@ -304,14 +304,14 @@ class RotatedWind:
         wind_z_versor = eigvecs[:, sorted_index[1]].reshape(3, 1)
 
         wind_bx = (
-                bx * wind_x_versor[0]
-                + by * wind_x_versor[1]
-                + bz * wind_x_versor[2]
+            bx * wind_x_versor[0]
+            + by * wind_x_versor[1]
+            + bz * wind_x_versor[2]
         )
         wind_bz = (
-                bx * wind_z_versor[0]
-                + by * wind_z_versor[1]
-                + bz * wind_z_versor[2]
+            bx * wind_z_versor[0]
+            + by * wind_z_versor[1]
+            + bz * wind_z_versor[2]
         )
 
         wind_bx, wind_x_versor = correct_bx(wind_bx, wind_x_versor, bx, by, bz)
