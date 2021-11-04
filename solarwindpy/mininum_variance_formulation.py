@@ -18,7 +18,7 @@ class KindMv(Enum):
     Z_VERSOR = 2
 
 
-KIND_MV = KindMv.X_VERSOR
+KIND_MV = KindMv.Z_VERSOR
 
 
 def calculate_minimum_variance(bx, by, bz):
@@ -302,6 +302,20 @@ class RotatedWind:
 
         wind_x_versor = eigvecs[:, sorted_index[0]].reshape(3, 1)
         wind_z_versor = eigvecs[:, sorted_index[1]].reshape(3, 1)
+
+        wind_bx = (
+                bx * wind_x_versor[0]
+                + by * wind_x_versor[1]
+                + bz * wind_x_versor[2]
+        )
+        wind_bz = (
+                bx * wind_z_versor[0]
+                + by * wind_z_versor[1]
+                + bz * wind_z_versor[2]
+        )
+
+        wind_bx, wind_x_versor = correct_bx(wind_bx, wind_x_versor, bx, by, bz)
+        wind_bz, wind_z_versor = correct_bz(wind_bz, wind_z_versor, bx, by, bz)
 
         main_versor = get_main_versor(KIND_MV, wind_x_versor, wind_z_versor)
 

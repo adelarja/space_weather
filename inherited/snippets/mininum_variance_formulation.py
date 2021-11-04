@@ -611,9 +611,9 @@ bz_mc = (
 # Here I plot B in gse coordinates
 ##################################################################
 fig, axs = plt.subplots(3)
-axs[0].plot(by)
-axs[0].plot(bz)
-axs[0].plot(bx)
+axs[0].plot(by_n)
+axs[0].plot(bz_n)
+axs[0].plot(bx_n)
 
 axs[1].plot(by_mc)
 axs[1].plot(bz_mc)
