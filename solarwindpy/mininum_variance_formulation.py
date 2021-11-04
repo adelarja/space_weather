@@ -305,14 +305,12 @@ class RotatedWind:
 
         main_versor = get_main_versor(KIND_MV, wind_x_versor, wind_z_versor)
 
-        theta_monio_min_var = np.arccos(main_versor[2]) * 180 / np.pi
-        theta_min_var = 90 - theta_monio_min_var
+        theta_aux_min_var = np.arccos(main_versor[2]) * 180 / np.pi
+        theta_min_var = 90 - theta_aux_min_var
 
         mod = np.sqrt(main_versor[0] ** 2 + main_versor[1] ** 2)
-        p_zn_eclip_versor_x_gse = main_versor[0] / mod
-        p_zn_eclip_versor_y_gse = main_versor[1] / mod
-        cos_de_phi_min_var = p_zn_eclip_versor_x_gse
-        sin_de_phi_min_var = p_zn_eclip_versor_y_gse
+        cos_de_phi_min_var = main_versor[0] / mod
+        sin_de_phi_min_var = main_versor[1] / mod
 
         if sin_de_phi_min_var > 0 and cos_de_phi_min_var > 0:
             phi_min_var = np.arccos(cos_de_phi_min_var) * 180 / np.pi
