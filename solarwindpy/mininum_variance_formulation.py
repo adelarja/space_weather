@@ -4,11 +4,21 @@ Created on Sun Oct 10 10:32:58 2021
 
 @author: aguli
 """
+from enum import Enum
+
 import numpy as np
 
 import scipy.linalg as la
 
 from wind import MagneticField
+
+
+class KindMv(Enum):
+    X_VERSOR = 1
+    Z_VERSOR = 2
+
+
+KIND_MV = KindMv.X_VERSOR
 
 
 def calculate_minimum_variance(bx, by, bz):
@@ -168,9 +178,9 @@ def rotation(x_gse, y_gse, z_gse, theta_deg, phi_deg):
 
 
 def get_main_versor(kind_mv, x_versor_nube, z_versor_nube):
-    if kind_mv == 1:
+    if kind_mv == KindMv.Z_VERSOR:
         main_versor = z_versor_nube
-    elif kind_mv == 2:
+    elif kind_mv == KindMv.X_VERSOR:
         main_versor = x_versor_nube
     else:
         raise ValueError("kind_mv needs to be 1 or 2")
@@ -278,3 +288,45 @@ class RotatedWind:
         )
 
         return cls(rotated_bx, rotated_by, rotated_bz)
+
+    @classmethod
+    def get_rotated_wind_using_angles(cls, wind: list[MagneticField]):
+        bx = np.array([magnetic_field.bgse0 for magnetic_field in wind])
+        by = np.array([magnetic_field.bgse1 for magnetic_field in wind])
+        bz = np.array([magnetic_field.bgse2 for magnetic_field in wind])
+
+        minimum_variance_matrix = calculate_minimum_variance(bx, by, bz)
+        eigvals, eigvecs = la.eig(minimum_variance_matrix)
+        eigvals = eigvals.real
+        sorted_index = np.argsort(eigvals)
+
+        wind_x_versor = eigvecs[:, sorted_index[0]].reshape(3, 1)
+        wind_z_versor = eigvecs[:, sorted_index[1]].reshape(3, 1)
+
+        main_versor = get_main_versor(KIND_MV, wind_x_versor, wind_z_versor)
+
+        theta_monio_min_var = np.arccos(main_versor[2]) * 180 / np.pi
+        theta_min_var = 90 - theta_monio_min_var
+
+        mod = np.sqrt(main_versor[0] ** 2 + main_versor[1] ** 2)
+        p_zn_eclip_versor_x_gse = main_versor[0] / mod
+        p_zn_eclip_versor_y_gse = main_versor[1] / mod
+        cos_de_phi_min_var = p_zn_eclip_versor_x_gse
+        sin_de_phi_min_var = p_zn_eclip_versor_y_gse
+
+        if sin_de_phi_min_var > 0 and cos_de_phi_min_var > 0:
+            phi_min_var = np.arccos(cos_de_phi_min_var) * 180 / np.pi
+        # TODO We have two elifs checking the same condition. Should we
+        #  remove one?
+        elif sin_de_phi_min_var > 0 and cos_de_phi_min_var < 0:
+            phi_min_var = np.arccos(cos_de_phi_min_var) * 180 / np.pi
+        elif sin_de_phi_min_var < 0 and cos_de_phi_min_var < 0:
+            phi_min_var = 360 - np.arccos(cos_de_phi_min_var) * 180 / np.pi
+        elif sin_de_phi_min_var < 0 and cos_de_phi_min_var > 0:
+            phi_min_var = 360 - np.arccos(cos_de_phi_min_var) * 180 / np.pi
+        else:
+            raise ValueError("can not determine cuadrant Error")
+
+        bx_n, by_n, bz_n = rotation(bx, by, bz, theta_min_var, phi_min_var)
+
+        return cls(bx_n, by_n, bz_n)
