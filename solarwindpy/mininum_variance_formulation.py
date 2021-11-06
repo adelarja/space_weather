@@ -150,7 +150,7 @@ def rotation(x_gse, y_gse, z_gse, theta_deg, phi_deg):
     theta = theta_deg * np.pi / 180.0
     phi = phi_deg * np.pi / 180.0
     gamma = calc_gamma(phi, theta)
-    # building  the R matrix
+    # building the R matrix
     R = np.zeros((3, 3))
     R[0][0] = np.cos(gamma) * np.sin(theta) * np.cos(phi) - np.sin(
         gamma
@@ -169,10 +169,11 @@ def rotation(x_gse, y_gse, z_gse, theta_deg, phi_deg):
     R[2][0] = np.cos(theta) * np.cos(phi)
     R[2][1] = np.cos(theta) * np.sin(phi)
     R[2][2] = np.sin(theta)
+    RT = np.transpose(R)
     # applying the rotation by hand
-    x_mc = R[0][0] * x_gse + R[0][1] * y_gse + R[0][2] * z_gse
-    y_mc = R[1][0] * x_gse + R[1][1] * y_gse + R[1][2] * z_gse
-    z_mc = R[2][0] * x_gse + R[2][1] * y_gse + R[2][2] * z_gse
+    x_mc = RT[0][0] * x_gse + RT[0][1] * y_gse + RT[0][2] * z_gse
+    y_mc = RT[1][0] * x_gse + RT[1][1] * y_gse + RT[1][2] * z_gse
+    z_mc = RT[2][0] * x_gse + RT[2][1] * y_gse + RT[2][2] * z_gse
 
     return x_mc, y_mc, z_mc
 
@@ -302,11 +303,17 @@ class RotatedWind:
 
         wind_x_versor = eigvecs[:, sorted_index[0]].reshape(3, 1)
         wind_z_versor = eigvecs[:, sorted_index[1]].reshape(3, 1)
+        wind_y_versor = eigvecs[:, sorted_index[2]].reshape(3, 1)
 
         wind_bx = (
             bx * wind_x_versor[0]
             + by * wind_x_versor[1]
             + bz * wind_x_versor[2]
+        )
+        wind_by = (
+            bx * wind_y_versor[0]
+            + by * wind_y_versor[1]
+            + bz * wind_y_versor[2]
         )
         wind_bz = (
             bx * wind_z_versor[0]
@@ -316,29 +323,22 @@ class RotatedWind:
 
         wind_bx, wind_x_versor = correct_bx(wind_bx, wind_x_versor, bx, by, bz)
         wind_bz, wind_z_versor = correct_bz(wind_bz, wind_z_versor, bx, by, bz)
+        _, _, transposed_matrix = correct_by(
+            wind_by, wind_y_versor, wind_x_versor, wind_z_versor, bx, by, bz
+        )
 
-        main_versor = get_main_versor(KIND_MV, wind_x_versor, wind_z_versor)
-
-        theta_aux_min_var = np.arccos(main_versor[2]) * 180 / np.pi
-        theta_min_var = 90 - theta_aux_min_var
-
-        mod = np.sqrt(main_versor[0] ** 2 + main_versor[1] ** 2)
-        cos_de_phi_min_var = main_versor[0] / mod
-        sin_de_phi_min_var = main_versor[1] / mod
-
-        if sin_de_phi_min_var > 0 and cos_de_phi_min_var > 0:
-            phi_min_var = np.arccos(cos_de_phi_min_var) * 180 / np.pi
-        # TODO We have two elifs checking the same condition. Should we
-        #  remove one? (sin_de_phi_min_var > 0 and cos_de_phi_min_var < 0)
-        elif sin_de_phi_min_var > 0 and cos_de_phi_min_var < 0:
-            phi_min_var = np.arccos(cos_de_phi_min_var) * 180 / np.pi
-        elif sin_de_phi_min_var < 0 and cos_de_phi_min_var < 0:
-            phi_min_var = 360 - np.arccos(cos_de_phi_min_var) * 180 / np.pi
-        elif sin_de_phi_min_var < 0 and cos_de_phi_min_var > 0:
-            phi_min_var = 360 - np.arccos(cos_de_phi_min_var) * 180 / np.pi
+        tita_deg = np.arcsin(transposed_matrix[2][2]) * 180 / np.pi
+        tita = np.arcsin(transposed_matrix[2][2])
+        fi = np.arctan2(
+            transposed_matrix[1][2] / np.cos(tita),
+            transposed_matrix[0][2] / np.cos(tita),
+        )
+        fi_deg = fi * 180 / np.pi
+        if fi_deg < 0:
+            fi_deg_ = 360 + fi_deg
         else:
-            raise ValueError("can not determine cuadrant Error")
+            fi_deg_ = fi_deg
 
-        bx_n, by_n, bz_n = rotation(bx, by, bz, theta_min_var, phi_min_var)
+        bx_n, by_n, bz_n = rotation(bx, by, bz, tita_deg, fi_deg_)
 
         return cls(bx_n, by_n, bz_n)
