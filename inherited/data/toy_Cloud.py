@@ -19,11 +19,6 @@ by_nube = sp.jv(1, x1) * 10
 bz_nube = sp.jv(0, x1) * 10
 
 
-plt.plot(x1, by_nube)
-plt.plot(x1, bz_nube)
-plt.plot(x1, bx_nube)
-
-
 x_gse = np.array([1, 0, 0]).reshape(3, 1)
 y_gse = np.array([0, 1, 0]).reshape(3, 1)
 z_gse = np.array([0, 0, 1]).reshape(3, 1)
@@ -32,8 +27,8 @@ z_gse = np.array([0, 0, 1]).reshape(3, 1)
 theta_deg = 30
 phi_deg = 45
 # from deg to radians
-theta = theta_deg * np.pi / 180.0
-phi = phi_deg * np.pi / 180
+theta = np.deg2rad(theta_deg)
+phi = np.deg2rad(phi_deg)
 
 gamma = cg(phi, theta)
 # building  the R matrix
@@ -74,15 +69,26 @@ bz_gse = bx_nube * z_mc[0] + by_nube * z_mc[1] + bz_nube * z_mc[2]
 
 
 plt.figure(1)
-plt.plot(x1, by_nube)
-plt.plot(x1, bz_nube)
-plt.plot(x1, bx_nube)
-
+plt.plot(x1, by_nube, label='By_nube')
+plt.plot(x1, bz_nube,label='Bz_nube')
+plt.plot(x1, bx_nube,label='Bx_nube')
+plt.title('Components of Magnetic Field')
+plt.xlabel('time')
+plt.ylabel('nT')
+plt.legend()
+#plt.show()
+plt.savefig('Figura_Nube.png')
 
 plt.figure(2)
-plt.plot(x1, by_gse)
-plt.plot(x1, bz_gse)
-plt.plot(x1, bx_gse)
+plt.plot(x1, by_nube, label='By_gse')
+plt.plot(x1, bz_nube,label='Bz_gse')
+plt.plot(x1, bx_nube,label='Bz_gse')
+plt.title('Components of Magnetic Field')
+plt.xlabel('time')
+plt.ylabel('nT')
+plt.legend()
+#plt.show()
+plt.savefig('Figura_Nube_gse.png')
 
 
 bx_mc = RT[0][0] * bx_gse + RT[0][1] * by_gse + RT[0][2] * bz_gse
@@ -90,9 +96,15 @@ by_mc = RT[1][0] * bx_gse + RT[1][1] * by_gse + RT[1][2] * bz_gse
 bz_mc = RT[2][0] * bx_gse + RT[2][1] * by_gse + RT[2][2] * bz_gse
 
 plt.figure(3)
-plt.plot(x1, by_mc)
-plt.plot(x1, bz_mc)
-plt.plot(x1, bx_mc)
+plt.plot(x1, by_nube, label='By_mc')
+plt.plot(x1, bz_nube,label='Bz_mc')
+plt.plot(x1, bx_nube,label='Bz_mc')
+plt.title('Components of Magnetic Field')
+plt.xlabel('time')
+plt.ylabel('nT')
+plt.legend()
+#plt.show()
+plt.savefig('Figura_Nube_mc.png')
 
 np.save("bx.npy", bx_gse)  # save
 np.save("by.npy", by_gse)  # save
