@@ -2,7 +2,13 @@ from datetime import datetime
 
 import numpy as np
 
-from solarwindpy.mininum_variance_formulation import RotatedWind
+import pytest
+
+from solarwindpy.mininum_variance_formulation import (
+    KindMv,
+    RotatedWind,
+    get_main_versor,
+)
 from solarwindpy.wind import MagneticField
 
 
@@ -679,3 +685,20 @@ def test_rotation_using_transposed():
     assert all(check_element_by_element(EXPECTED_X_OUTPUT, rotated_wind.bgse0))
     assert all(check_element_by_element(EXPECTED_Y_OUTPUT, rotated_wind.bgse1))
     assert all(check_element_by_element(EXPECTED_Z_OUTPUT, rotated_wind.bgse2))
+
+
+@pytest.mark.parametrize(
+    "kind_mv, xversor, zversor, expected_versor",
+    [
+        (KindMv.X_VERSOR, "XVERSOR", "ZVERSOR", "XVERSOR"),
+        (KindMv.Z_VERSOR, "XVERSOR", "ZVERSOR", "ZVERSOR"),
+    ],
+)
+def test_get_main_versor(kind_mv, xversor, zversor, expected_versor):
+    assert get_main_versor(kind_mv, xversor, zversor) == expected_versor
+
+
+def test_get_main_versor_exception():
+    kind_mv = 21
+    with pytest.raises(ValueError):
+        get_main_versor(kind_mv, "FAKE_VALUE_1", "FAKE_VALUE_2")
