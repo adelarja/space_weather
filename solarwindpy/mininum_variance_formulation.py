@@ -10,7 +10,7 @@ import numpy as np
 
 import scipy.linalg as la
 
-from wind import MagneticField
+from solarwindpy.wind import MagneticField
 
 
 class KindMv(Enum):
@@ -335,10 +335,10 @@ class RotatedWind:
         )
         fi_deg = fi * 180 / np.pi
         if fi_deg < 0:
-            fi_deg_ = 360 + fi_deg
+            fi_deg = 360 + fi_deg
         else:
-            fi_deg_ = fi_deg
+            fi_deg = fi_deg
 
-        bx_n, by_n, bz_n = rotation(bx, by, bz, tita_deg, fi_deg_)
+        bx_n, by_n, bz_n = rotation(bx, by, bz, tita_deg, fi_deg)
 
         return cls(bx_n, by_n, bz_n)
