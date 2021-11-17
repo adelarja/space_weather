@@ -3,6 +3,10 @@ solarwindpy package
 
 Submodules
 ----------
+.. toctree::
+   :maxdepth: 4
+
+
 
 solarwindpy.mininum\_variance\_formulation module
 -------------------------------------------------
