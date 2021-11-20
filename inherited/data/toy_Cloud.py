@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from rotar import calculo_gamma as cg
+import rotar
 
 import scipy.special as sp
 
@@ -68,44 +69,26 @@ by_gse = bx_nube * y_mc[0] + by_nube * y_mc[1] + bz_nube * y_mc[2]
 bz_gse = bx_nube * z_mc[0] + by_nube * z_mc[1] + bz_nube * z_mc[2]
 
 
-plt.figure(1)
-plt.plot(x1, by_nube, label='By_nube')
-plt.plot(x1, bz_nube,label='Bz_nube')
-plt.plot(x1, bx_nube,label='Bx_nube')
-plt.title('Components of Magnetic Field')
-plt.xlabel('time')
-plt.ylabel('nT')
-plt.legend()
-#plt.show()
-plt.savefig('Figura_Nube.png')
-
-plt.figure(2)
-plt.plot(x1, by_gse, label='By_gse')
-plt.plot(x1, bz_gse,label='Bz_gse')
-plt.plot(x1, bx_gse,label='Bz_gse')
-plt.title('Components of Magnetic Field')
-plt.xlabel('time')
-plt.ylabel('nT')
-plt.legend()
-#plt.show()
-plt.savefig('Figura_Nube_gse.png')
-
-
 bx_mc = RT[0][0] * bx_gse + RT[0][1] * by_gse + RT[0][2] * bz_gse
 by_mc = RT[1][0] * bx_gse + RT[1][1] * by_gse + RT[1][2] * bz_gse
 bz_mc = RT[2][0] * bx_gse + RT[2][1] * by_gse + RT[2][2] * bz_gse
 
-plt.figure(3)
-plt.plot(x1, by_mc, label='By_mc')
-plt.plot(x1, bz_mc,label='Bz_mc')
-plt.plot(x1, bx_mc,label='Bz_mc')
-plt.title('Components of Magnetic Field')
-plt.xlabel('time')
-plt.ylabel('nT')
-plt.legend()
-#plt.show()
-plt.savefig('Figura_Nube_mc.png')
 
-np.save("bx.npy", bx_gse)  # save
-np.save("by.npy", by_gse)  # save
-np.save("bz.npy", bz_gse)  # save
+# generating plots 
+fig, ax = plt.subplots()
+ax.set_title("Components of Magnetic Field; GSE")
+ax = rotar.plot(x1, bx_gse, by_gse,bz_gse, ax, {"color": "seagreen", "label": "BX"}, {"color": "gold", "label": "BY"}, {"color": "plum", "label": "BZ"})
+ax.legend()
+
+
+fig, ax = plt.subplots()
+ax.set_title("Components of Magnetic Field; MC")
+ax = rotar.plot(x1, bx_mc, by_mc, bz_mc, ax, {"color": "forestgreen", "label": "BX"}, {"color": "khaki", "label": "BY"}, {"color": "pink", "label": "BZ"})
+ax.legend()
+
+
+fig, ax = plt.subplots()
+ax.set_title("Components of Magnetic Field; Nube")
+ax = rotar.plot(x1, bx_nube, by_nube, bz_nube, ax, {"color": "limegreen", "label": "BX"}, {"color": "yellow", "label": "BY"}, {"color": "orchid", "label": "BZ"})
+ax.legend()
+plt.show()
