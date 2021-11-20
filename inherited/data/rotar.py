@@ -5,6 +5,7 @@ Created on Fri Sep 24 15:42:34 2021
 @author: aguli
 """
 import numpy as np
+from cycler import cycler
 
 # 'Rotate Magnetic clouds from GSE_Coordinates as input'
 # 'Delivers MC_Coordinates as output'
@@ -68,3 +69,25 @@ def rotacion(x_gse, y_gse, z_gse, theta_deg, phi_deg):
     z_mc = R[2][0] * x_gse + R[2][1] * y_gse + R[2][2] * z_gse
 
     return x_mc, y_mc, z_mc
+
+def plot(time, bx, by, bz, ax=None, scatter_bx=None,  scatter_by=None, scatter_bz=None):
+
+    """ The aim of this class is to create a plot of the components of Cloud's Magnetic Field
+    """
+    ax = plt.gca() if ax is None else ax
+    scatter_bx.setdefault("linewidth", 5)
+    scatter_by.setdefault("linewidth", 5)
+    scatter_bz.setdefault("linewidth", 5)
+
+    scatter_bx.setdefault("color", "r")
+    scatter_by.setdefault("color", "g")
+    scatter_bz.setdefault("color", "b")
+
+
+  #  ax.scatter = {} if scatter_kws is None else scatter_kws
+
+    ax.plot(time, bx, **scatter_bx)
+    ax.plot(time, by, **scatter_by)
+    ax.plot(time, bz, **scatter_bz)
+
+    return ax
