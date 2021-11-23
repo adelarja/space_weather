@@ -6,15 +6,38 @@
 Welcome to solarwindpy's documentation!
 =======================================
 
+Welcome to the complete Beginner's guide to solarwindpy!. If you're looking for a comprenensive
+guide to the solarwindpy subtitling software, then you've come to the right place.
+
+**Who is this software for?**
+
+You need to know anything about clouds to utilizy this software, but this is completely
+beginner-friendly. Even if you have some subtitling experience, you'll be sure to friendly
+this guide useful.
+
+If you're completely new to Solarwinpy, install Solarwinpy firs and then explore these pages:
+
+Creating Subtitles
+Customizing Subtitles
+Saving and Exporting Subtitles
+
+If you're looking for Solarwind's more advanced features, click on the links below.
+
+Synchronizing Subtitles
+Translating Subtitles
+
+
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
-
-
-
+   :caption: Contents
+  
+  
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+
