@@ -21,8 +21,9 @@ Getting solarwinpy to use MPlayer
 5. Click on **Finish**.
 6. The MPlayer OS x Extended Patlwill be filled. Click on **Accept** to accept changes.
 
-.. figure:: /images/solarwindpy_preferences.png
-   :alt: solarwindpy configuration
+.. figure:: /images/imagename.png
+   :alt: alt text goes here
    :align: center
+   :scale: 50%
 
    *Getting solarwindpy to use MPlayer*
