@@ -22,19 +22,21 @@ Customizing Subtitles
 Saving and Exporting Subtitles
 
 .. _uniquename:
-If you're looking for Solarwind's more advanced features, :ref:`install solarwindpy  <settingup>`, 
-click on the links below.
+   If you're looking for Solarwind's more advanced features,:ref:`install solarwindpy <settingup>`, click on the links below.
 
 Synchronizing Subtitles
 Translating Subtitles
 
+.. toctree
+   :maxdepth: 2
+   :caption:
 
-
+newfilename
+  
 .. toctree::
    :maxdepth: 2
-   :caption: Contents
-  
-  
+   :caption: newfilename
+
 Indices and tables
 ==================
 

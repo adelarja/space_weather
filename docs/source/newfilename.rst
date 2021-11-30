@@ -26,4 +26,6 @@ Getting solarwinpy to use MPlayer
    :align: center
    :scale: 50%
 
+   Image caption
+
    *Getting solarwindpy to use MPlayer*
