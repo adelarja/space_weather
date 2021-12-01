@@ -17,31 +17,12 @@ this guide useful.
 
 If you're completely new to Solarwinpy, install Solarwinpy firs and then explore these pages:
 
-Creating Subtitles
-Customizing Subtitles
-Saving and Exporting Subtitles
+.. _install solarwindpy:
 
-.. _uniquename:
-   If you're looking for Solarwind's more advanced features,:ref:`install solarwindpy <settingup>`, click on the links below.
+   If you're looking for Solarwind's more advanced features, :doc:`install solarwindpy`, click on the links below.
 
-Synchronizing Subtitles
-Translating Subtitles
 
-.. toctree
-   :maxdepth: 2
-   :caption:
 
-newfilename
-  
-.. toctree::
-   :maxdepth: 2
-   :caption: newfilename
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
 
