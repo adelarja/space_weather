@@ -7,11 +7,12 @@ Download solarwindpy from:
 
 http://www.solarwindpy.org/download.html
 
-.. figure:: /images/imagename.png
-   :alt: alt text goes here
-   :align: center
-   :scale: 50%
+.. figure:: _estático/logo_SWx.png
+   :alt: alternate text
+   :height: 150
+   :width: 150
+   :scale: 50
 
-   Image caption
+   Logo Solarwindpy
 
    *Getting solarwindpy*

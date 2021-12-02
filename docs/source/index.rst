@@ -6,8 +6,8 @@
 Welcome to solarwindpy's documentation!
 =======================================
 
-Welcome to the complete Beginner's guide to solarwindpy!. If you're looking for a comprenensive
-guide to the solarwindpy subtitling software, then you've come to the right place.
+SolarWindPy: a python package to find a Magnetic Cloud frame of reference to heliospheric 
+observes using a Minimum Variance Approach.
 
 **Who is this software for?**
 
@@ -19,7 +19,7 @@ If you're completely new to Solarwinpy, install Solarwinpy firs and then explore
 
 .. _install solarwindpy:
 
-   If you're looking for Solarwind's more advanced features, :doc:`install solarwindpy`, click on the links below.
+   If you're looking for Solarwind's more advanced features, :ref:`install solarwindpy`, click on the links below.
 
 
 

@@ -3,14 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Title
-======
+SolarWindPy: a python package to find a Magnetic Cloud frame of reference to heliospheric observes using a Minimum Variance Approach
+====================================================================================================================================
 
-section
--------
+Abstract
 
-Subsection
-~~~~~~~~~
+    The Abstract
+
+Keywords: Magnetic Clouds, Minimun Variance, Python Package
+
 
 .. toctree::
    :maxdepth: 2
