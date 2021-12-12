@@ -10,7 +10,7 @@ Abstract
 
     The Abstract
 
-Keywords: Magnetic Clouds, Minimun Variance, Python Package
+Keywords: Magnetic Clouds; Minimum Variance; Python Package
 
 
 .. toctree::
