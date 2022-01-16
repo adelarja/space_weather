@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Oct 10 10:32:58 2021
+#This file is part of the
+#	Solarwindpy Project(https://github.com/adelarja/space_weather).
 
-@author: aguli
-"""
+#Copyright (c) 2021, Adriana Gulisano, Adel Arja, Ricardo Pafundigit, Violeta Bazzano.
+#All rights reserved.
+
+#License: BSD 3-Clause License
+#	Full Text: https://github.com/adelarja/space_weather/blob/main/LICENSE
+
+
 from enum import Enum
 
 import numpy as np
