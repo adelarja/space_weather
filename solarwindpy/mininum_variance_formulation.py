@@ -11,8 +11,7 @@ import numpy as np
 import scipy.linalg as la
 
 from solarwindpy.wind import MagneticField
-"""The Minimum Variance method (MV) has been extensively used to find the orientation
-of structures in the interplanetary medium"""
+
 
 class KindMv(Enum):
     X_VERSOR = 1
@@ -21,10 +20,6 @@ class KindMv(Enum):
 
 KIND_MV = KindMv.Z_VERSOR
 
-""" The Minimum Variance method applied to the observed temporal series of the magnetic
-field can estimate quite well the orientation of the cloud axis, when the distance between
-the axis and the spacecraft trajectory in the MC (the impact parameter, p) is low with 
-respect to the cloud radius"""
 
 def calculate_minimum_variance(bx, by, bz):
     minimum_variance_matrix = np.ones((3, 3))
