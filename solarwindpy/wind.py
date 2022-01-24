@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
-# This file is part of the
-#   Instituto de Astronomico y Fisica del Espacio (IAFE, CONICET-UBA)
-# Copyright (c) 2021, Departamento de Fisica, FCEN (UBA).
-# v1.2, by S. Dasso, Dec 20, 2007.
-#   Full Text: https://github.com/adelarja/space_weather/blob/main/LICENSE.md
+#This file is part of the
+#	Solarwindpy Project(https://github.com/adelarja/space_weather).
+
+#Copyright (c) 2021, Adriana Gulisano, Adel Arja, Ricardo Pafundigit, Violeta Bazzano.
+#All rights reserved.
+
+#License: BSD 3-Clause License
+#	Full Text: https://github.com/adelarja/space_weather/blob/main/LICENSE
+
+
 from dataclasses import dataclass
 from datetime import datetime
 
