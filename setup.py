@@ -61,7 +61,7 @@ setup(
     packages=[
         "solarwindpy",
     ],
-    license="The MIT License",
+    license="BSD 3-Clause License",
     install_requires=REQUIREMENTS,
     keywords=[
         "solar",
@@ -74,7 +74,7 @@ setup(
         "Development Status :: 1 - Planning",
         "Intended Audience :: Education",
         "Intended Audience :: Science/Research",
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: BSD 3-Clause License",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3.9",
