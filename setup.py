@@ -26,7 +26,7 @@ REQUIREMENTS = [
     "scipy",
     "attrs",
     "matplotlib",
-    "heliopy",
+    "heliopy==0.15.4",
     "requests",
     "sunpy",
     "h5netcdf",
