@@ -157,29 +157,29 @@ def rotation(x_gse, y_gse, z_gse, theta_deg, phi_deg):
     phi = phi_deg * np.pi / 180.0
     gamma = calc_gamma(phi, theta)
     # building the R matrix
-    R = np.zeros((3, 3))
-    R[0][0] = np.cos(gamma) * np.sin(theta) * np.cos(phi) - np.sin(
+    r = np.zeros((3, 3))
+    r[0][0] = np.cos(gamma) * np.sin(theta) * np.cos(phi) - np.sin(
         gamma
     ) * np.sin(phi)
-    R[0][1] = np.cos(gamma) * np.sin(theta) * np.sin(phi) + np.sin(
+    r[0][1] = np.cos(gamma) * np.sin(theta) * np.sin(phi) + np.sin(
         gamma
     ) * np.cos(phi)
-    R[0][2] = -np.cos(gamma) * np.cos(theta)
-    R[1][0] = -np.sin(gamma) * np.sin(theta) * np.cos(phi) - np.cos(
+    r[0][2] = -np.cos(gamma) * np.cos(theta)
+    r[1][0] = -np.sin(gamma) * np.sin(theta) * np.cos(phi) - np.cos(
         gamma
     ) * np.sin(phi)
-    R[1][1] = -np.sin(gamma) * np.sin(theta) * np.sin(phi) + np.cos(
+    r[1][1] = -np.sin(gamma) * np.sin(theta) * np.sin(phi) + np.cos(
         gamma
     ) * np.cos(phi)
-    R[1][2] = np.sin(gamma) * np.cos(theta)
-    R[2][0] = np.cos(theta) * np.cos(phi)
-    R[2][1] = np.cos(theta) * np.sin(phi)
-    R[2][2] = np.sin(theta)
-    RT = np.transpose(R)
+    r[1][2] = np.sin(gamma) * np.cos(theta)
+    r[2][0] = np.cos(theta) * np.cos(phi)
+    r[2][1] = np.cos(theta) * np.sin(phi)
+    r[2][2] = np.sin(theta)
+    rt = np.transpose(r)
     # applying the rotation by hand
-    x_mc = RT[0][0] * x_gse + RT[0][1] * y_gse + RT[0][2] * z_gse
-    y_mc = RT[1][0] * x_gse + RT[1][1] * y_gse + RT[1][2] * z_gse
-    z_mc = RT[2][0] * x_gse + RT[2][1] * y_gse + RT[2][2] * z_gse
+    x_mc = rt[0][0] * x_gse + rt[0][1] * y_gse + rt[0][2] * z_gse
+    y_mc = rt[1][0] * x_gse + rt[1][1] * y_gse + rt[1][2] * z_gse
+    z_mc = rt[2][0] * x_gse + rt[2][1] * y_gse + rt[2][2] * z_gse
 
     return x_mc, y_mc, z_mc
 
