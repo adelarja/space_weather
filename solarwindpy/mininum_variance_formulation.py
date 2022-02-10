@@ -29,13 +29,13 @@ KIND_MV = KindMv.Z_VERSOR
 
 def calculate_minimum_variance(bx, by, bz):
     minimum_variance_matrix = np.ones((3, 3))
-    minimum_variance_matrix[0][0] = np.mean(bx ** 2) - np.mean(bx) * np.mean(
+    minimum_variance_matrix[0][0] = np.mean(bx**2) - np.mean(bx) * np.mean(
         bx
     )
-    minimum_variance_matrix[1][1] = np.mean(by ** 2) - np.mean(by) * np.mean(
+    minimum_variance_matrix[1][1] = np.mean(by**2) - np.mean(by) * np.mean(
         by
     )
-    minimum_variance_matrix[2][2] = np.mean(bz ** 2) - np.mean(bz) * np.mean(
+    minimum_variance_matrix[2][2] = np.mean(bz**2) - np.mean(bz) * np.mean(
         bz
     )
     minimum_variance_matrix[0][1] = np.mean(bx * by) - np.mean(bx) * np.mean(
