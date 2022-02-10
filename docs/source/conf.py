@@ -31,9 +31,9 @@ release = solarwindpy.__version__
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.autodoc', #permite crear doc automaticamente de docstrings
-              'sphinx.ext.intersphinx',
-              'sphinx.ext.todo',
-              'sphinx.ext.mathjax',
+              'sphinx.ext.intersphinx',# crea enlaces a documentos
+              'sphinx.ext.todo',# ToDo cuentas por hacer
+              'sphinx.ext.mathjax',# Permite agregar formulas mat escritas en LaTeX
               'sphinx.ext.napoleon',
               'sphinx.ext.autosummary',
               'sphinx.ext.viewcode', #codigo se incluye en la documentacion
@@ -61,7 +61,7 @@ exclude_patterns = []
 
 
 # -- Options for HTML output -------------------------------------------------
-html_sidebars = { '**': ['globaltoc.html','relations.html',
+html_sidebars = { '**': ['globaltoc.html','relations.html', #Contenidos Barra Lateral
             'sourcelink.html','searchbox.html'], }
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
