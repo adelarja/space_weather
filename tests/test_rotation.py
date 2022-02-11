@@ -14,12 +14,12 @@ import numpy as np
 
 import pytest
 
-from solarwindpy.mininum_variance_formulation import (
+from solarwindpy.data_manager import MagneticField
+from solarwindpy.rotation import (
     KindMv,
     RotatedWind,
     get_main_versor,
 )
-from solarwindpy.wind import MagneticField
 
 
 X_INPUT = np.array(

@@ -17,7 +17,7 @@ import numpy as np
 
 import scipy.linalg as la
 
-from solarwindpy.wind import MagneticField
+from solarwindpy.data_manager import MagneticField
 
 
 class KindMv(Enum):
