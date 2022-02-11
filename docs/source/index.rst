@@ -6,6 +6,13 @@
 Welcome to solarwindpy's documentation!
 =======================================
 
+.. figure:: _estático/logo_SWx.png
+   :alt: alternate text
+   :height: 200
+   :width: 200
+   :scale: 200
+
+
 .. toctree::
    :maxdepth: 3
    :numbered:
