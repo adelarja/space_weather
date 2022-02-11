@@ -6,23 +6,10 @@
 Welcome to solarwindpy's documentation!
 =======================================
 
-SolarWindPy: a python package to find a Magnetic Cloud frame of reference to heliospheric 
-observes using a Minimum Variance Approach.
+.. toctree::
+   :maxdepth: 3
+   :numbered:
+   :caption: Contents:
 
-**Who is this software for?**
-
-You need to know anything about clouds to utilizy this software, but this is completely
-beginner-friendly. Even if you have some subtitling experience, you'll be sure to friendly
-this guide useful.
-
-If you're completely new to Solarwinpy, install Solarwinpy firs and then explore these pages:
-
-.. _install solarwindpy:
-
-   If you're looking for Solarwind's more advanced features, :ref:`install solarwindpy`, click on the links below.
-
-
-
-
-
-
+   doc
+   /tutorial.ipynb
