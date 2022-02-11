@@ -8,7 +8,7 @@
 
 # License: BSD 3-Clause License
 # 	Full Text: https://github.com/adelarja/space_weather/blob/main/LICENSE
-
+"""This module helps to obtain Magnetic Fields Data."""
 
 from dataclasses import dataclass
 from datetime import datetime
@@ -33,7 +33,9 @@ class Period:
 
 @dataclass
 class MagneticField:
-    """The aim of this dataclass, is to make it easier to perform the
+    """A dataclass to represent a Magnetic Field components.
+
+    The aim of this dataclass, is to make it easier to perform the
     calculations when rotating or when doing any process to the data.
 
     Instead of working over a DataFrame row, we will work over a MagneticField
@@ -48,6 +50,7 @@ class MagneticField:
 
 
 def not_nan_neither_inf(magnetic_field: MagneticField):
+    """Method used to filter invalid MAgneticField values."""
     invalid_gse0 = np.isnan(magnetic_field.bgse0) or np.isinf(
         magnetic_field.bgse0
     )
@@ -61,10 +64,13 @@ def not_nan_neither_inf(magnetic_field: MagneticField):
 
 
 class DataManager:
+    """This class abstracts methods needed to obtain Magnetic Fields Data."""
+
     @staticmethod
     def get_gse_magnetic_vector(period: Period) -> list[MagneticField]:
-        """This method retrieves the Magnetic Field Vector in Geocentric
-        Solar Ecliptic System (GSE).
+        """Obtain the Magnetic Field Vector in GSE.
+
+        GSE is the acronum for Geocentric Solar Ecliptic System.
 
         Args:
             period (Period): A Period object with the dato_from and date_to
