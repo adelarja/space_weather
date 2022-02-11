@@ -1,6 +1,16 @@
 **Solarwindpy**
 ***************
 
+.. figure:: _estático/logo_SWx.png
+   :alt: alternate text
+   :height: 200
+   :width: 200
+   :scale: 200
+
+    Logo Solarwindpy
+
+   *Getting solarwindpy*
+
 **Abstract**
 ============
 
@@ -84,6 +94,11 @@ estimated as well
 
 - **multiplicacion()**
     Una función que espera dos números y retorna el resultado
+
+**Algoritmos**
+==============
+
+
 
 
 **Que usamos hasta ahora**
