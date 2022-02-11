@@ -49,7 +49,7 @@ with open("README.md") as fp:
 # =============================================================================
 
 setup(
-    name="solarwindpy",
+    name="swindpy",
     version=VERSION,
     description="Package to analyze magnetic storm phenomena.",
     long_description=LONG_DESCRIPTION,
