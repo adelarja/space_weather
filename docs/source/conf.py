@@ -18,7 +18,7 @@ import solarwindpy
 # -- Project information -----------------------------------------------------
 
 project = 'solarwindpy'
-copyright = '2021, Adriana Gulisano, Adel Arja, Violeta Bazzano, Ricardo Pafundi'
+copyright = '2022, Adriana Gulisano, Adel Arja, Violeta Bazzano, Ricardo Pafundi'
 author = 'Adriana Gulisano, Adel Arja, Violeta Bazzano, Ricardo Pafundi'
 
 # The full version, including alpha/beta/rc tags
@@ -30,14 +30,17 @@ release = solarwindpy.__version__
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc', #permite crear doc automaticamente de docstrings
-              'sphinx.ext.intersphinx',
-              'sphinx.ext.todo',
-              'sphinx.ext.mathjax',
-              'sphinx.ext.napoleon',
-              'sphinx.ext.autosummary',
-              'sphinx.ext.viewcode', #codigo se incluye en la documentacion
-              'sphinx_rtd_theme'     #permite usar plantillas html
+extensions = [
+    'sphinx.ext.autodoc', #permite crear doc automaticamente de docstrings
+    'sphinx.ext.intersphinx',# crea enlaces a documentos
+    'sphinx.ext.coverage',
+    'sphinx.ext.todo',# ToDo cuentas por hacer
+    'sphinx.ext.mathjax',# Permite agregar formulas mat escritas en LaTeX
+    'nbsphinx',
+    'sphinx.ext.napoleon',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.viewcode', #codigo se incluye en la documentacion
+    'sphinx_rtd_theme'     #permite usar plantillas html
 ]
 
 autosummary_generate = True
@@ -61,15 +64,16 @@ exclude_patterns = []
 
 
 # -- Options for HTML output -------------------------------------------------
-html_sidebars = { '**': ['globaltoc.html','relations.html',
+html_sidebars = { '**': ['globaltoc.html','relations.html', #Contenidos Barra Lateral
             'sourcelink.html','searchbox.html'], }
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 
-#
 html_theme = 'sphinx_rtd_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-#html_static_path = ['_static']
+# html_static_path = ['_static']
+
+master_doc = 'index'
