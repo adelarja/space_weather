@@ -49,14 +49,14 @@ with open("README.md") as fp:
 # =============================================================================
 
 setup(
-    name="solarwindpy",
+    name="swindpy",
     version=VERSION,
-    description="Package to rotate a solar magnetic cloud with Python.",
+    description="Package to analyze magnetic storm phenomena.",
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
     author="",
     author_email="",
-    url="",
+    url="https://github.com/adelarja/space_weather",
     py_modules=[],
     packages=[
         "solarwindpy",
@@ -74,7 +74,7 @@ setup(
         "Development Status :: 1 - Planning",
         "Intended Audience :: Education",
         "Intended Audience :: Science/Research",
-        "License :: OSI Approved :: BSD 3-Clause License",
+        "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3.9",
