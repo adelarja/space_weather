@@ -1,22 +1,24 @@
-**Solarwindpy**
+**Swindpy**
 ***************
 
-.. figure:: _estático/logo_SWx.png
-   :alt: alternate text
-   :height: 200
-   :width: 200
-   :scale: 200
+..image:: SPACE_WEATHER/docs/source/_estatico/logo_SWx.png
+    :width: 200
+    :align: center
+    :height: 200
+    :alt: alternate text
 
-    Logo Solarwindpy
+    Logo Swindpy
 
-   *Getting solarwindpy*
+   *Getting swindpy*
 
-**Abstract**
-============
+.. sidebar:: Abstract
+    :subtitle: swindpy
 
-In this application we use Minimum Variance Technique to obtain the 
-orientation of magnetic clouds as long as the correct borders of the 
-cloud are provided.
+    In this application we use Minimum Variance 
+    Technique to obtain the orientation of magnetic
+    clouds as long as the correct borders of the 
+    cloud are provided.
+
 
 **Motivation**
 ==============
@@ -78,15 +80,23 @@ estimated as well
 
 .. code-block:: bash
 
+    * numpy
+    * pandas
+    * scipy 
     * attrs(>=21.1.0) for building the backend.
     * matplotlib(>=3.4.0) for plots management.
+    * heliopy==0.15.4
+    * requests
+    * sunpy
+    * h5netcdf
+    * cdflib
 
 **Instalation**
 ===============
 
 .. code-block:: bash
 
-    $ pip install libreriasolarwindpy==0.0.1
+    $ pip install libreriaswindpy==0.0.1
 
 
 **Function**

@@ -49,7 +49,7 @@ extensions = [
     'sphinx_rtd_theme'     #permite usar plantillas html
 ]
 
-#autosummary_generate = True
+autosummary_generate = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -68,6 +68,7 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
+#exclude_patterns = ['_build', '**.ipynb_checkpoints']
 
 # -- Options for HTML output -------------------------------------------------
 #html_sidebars = { '**': ['globaltoc.html','relations.html', #Contenidos Barra Lateral
