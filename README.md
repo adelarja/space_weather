@@ -1,7 +1,7 @@
 # solarwindpy
-<div align="center">
-![logo](https://github.com/adelarja/space_weather/blob/main/res/logo.jpg)
-</div>
+<p align="center">
+    <img width=200 src="https://github.com/adelarja/space_weather/blob/main/res/logo.jpg">
+</p>
 
 [![Build status](https://github.com/adelarja/space_weather/actions/workflows/solarwindpy_ci.yml/badge.svg)](https://github.com/adelarja/space_weather/actions)
 [![PyPI](https://img.shields.io/pypi/v/swindpy?color=blue)](https://pypi.org/project/swindpy/)
