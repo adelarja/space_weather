@@ -1,4 +1,9 @@
 # solarwindpy
+
+[![Build status](https://github.com/adelarja/space_weather/actions/workflows/solarwindpy_ci.yml/badge.svg)](https://github.com/adelarja/space_weather/actions)
+[![PyPI](https://img.shields.io/pypi/v/swindpy?color=blue)](https://pypi.org/project/swindpy/)
+
+# solarwindpy
 <img src="res/logo_SWx.jpg" width="96" height="96" />
 A project to rotate an interplanetary magnetic cloud
 
