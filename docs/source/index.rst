@@ -3,20 +3,24 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to solarwindpy's documentation!
+Welcome to Swindpy's documentation!
 =======================================
 
 .. figure:: _estatico/logo_SWx.png
-   :alig: center
+   :alt: alternate text
    :height: 200
    :width: 200
    :scale: 200
-
+   :align: center
+   :figclass: align-center
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :numbered:
    :caption: Contents:
 
    doc
-   /tutorial.ipynb
+   doc1
+
+
+   
