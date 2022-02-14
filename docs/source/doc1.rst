@@ -1,16 +1,13 @@
 **Theory**
-**********
+==========
 
-.. figure:: _estatico/logo_SWx.png
+.. figure:: _static/logo_SWx.png
    :alt: alternate text
    :height: 200
    :width: 200
    :scale: 200
    :align: center
    :figclass: align-center
-
-
-
 
 **Introduction**
 ================
@@ -65,29 +62,12 @@ structures that present three clearly distinguished variance directions. In part
 when this method is applied to the magnetic field  B, the mean quadratic deviation in a 
 generic direction n is:
 
-
-
 where B^k corresponds to each element k of the  magnetic field series. The field mean 
 value is.
 
-
-
-The MV method finds the direction where sigma_n^2 is minimum under the constraint  
-|n|=1. The Lagrange multipliers variational method can be used in this determination.
-lambda is the Lagrange multiplier in the following system of equations:
-
-
-
 where i=1,2,3 corresponds to the 3 components of n. After applying Eq.(3),
 the resulting set of three equations can be written in matrix form as:
-
-
-
 where
-
-
-
-
 The indexes {i,j} represent the field components. The matrix mij is symmetric
 with real eigenvalues lambda1, lambda2 and lambda3 and  orthogonal eigenvectors
 (Xmv,  Ymv, Zmv), which represent the directions of minimum, maximum and  intermediate
@@ -96,16 +76,13 @@ is a unit vector). The eigenvalues provide the corresponding variance sigman^2
 associated with each direction. Thus, from the eigenvectors (Xmv, Ymv, Zmv),it is 
 possible to construct the rotation matrix T such that the components of the field in 
 the MV frame of reference can be written as:
-
-
-We will call BxMv the field component that corresponds to Xmv (minimum variance 
+We will call BxMv the field component that corresponds to Xmv (minimum variance
 direction), BYmv to that of the maximum variance direction,  and BZmv to
 that having the intermediate variance.
 
 **Minimun Variance method applied to magnetic clouds**
 ------------------------------------------------------
-
-The large and coherent rotation of the magnetic field vector observed by the 
+The large and coherent rotation of the magnetic field vector observed by the
 spacecraft when p ~ 0, allows us to associate: (1) the large scale maximum variance
 direction to the azimuthal direction (variation of the observed component of the 
 field of the order of 2 B0, for Bphi component, (2) the minimum variation to the 
@@ -114,14 +91,14 @@ radial direction (the variance will be close to zero, for the radial Br componen
 for the axial Bz component, the observations of magnetic clouds, show that the modulus 
 of the magnetic field does not remain constant, being maximum near the cloud axis and 
 minimum toward the cloud boundaries. Moreover, for MCs in expansion and due to magnetic 
-flux conservation in the expanding parcels of fluid, |B| can decrease significantly 
-while the spacecraft observes the cloud. This decrease of |B| with time is called the
+flux conservation in the expanding parcels of fluid, mod(B) can decrease significantly
+while the spacecraft observes the cloud. This decrease of mod(B) with time is called the
 'aging' effect since the {\it in situ} observations are done at a time, which is more 
 distant from the launch time as the spacecraft crosses the MC. This decrease of
-|B| can affect significantly the result of the MV method. However, the relevant 
+mod(B) can affect significantly the result of the MV method. However, the relevant
 information to find the cloud orientation is in the rotation of the magnetic field.
-Thus, to decouple the variation of |B| from the rotation, we apply the MV technique
-to the normalized field vector series: b(t) = B(t)/|B(t)|.
+Thus, to decouple the variation of mod(B) from the rotation, we apply the MV technique
+to the normalized field vector series: b(t) = B(t)/mod(B(t)).
 
 Because MV does not give the positive sense of the variance directions, we choose 
 this sense for Xmv so that it makes an acute angle with the Earth-Sun direction 
@@ -131,32 +108,12 @@ is closing the right handed system of coordinates.
 The intrinsic cloud reference system and the Geocentric Solar Ecliptic (GSE)
 system of coordinates can be related using the
 following rotation matrix:
-
-
-
 where:
-
-
-
-
-
 and
-
-
-
-
-
-
-Without loosing generality we choose delta (the angle of an arbitrary rotation 
+Without loosing generality we choose delta (the angle of an arbitrary rotation
 in the plane (Xcloud, Ycloud) such that Xgse.Ycloud = 0, that is:
-
-
-
-
-
 In this way we can apply the technique to the parcel of Solar Wind that corresponds
 to an MC and rotate it in the Cloud Frame.
-
 
 **Section 2**
 =============
@@ -177,83 +134,57 @@ heliophysics community.
 
 **Indexing**
 ------------
-
-    Equation 11
-
-
-
-                                                    (11)
+Equation 11
+(11)
 
 
 **Section 3**
 =============
-
 Example of code with minted, and follow pep8
-
 .. code-block: bash
-
 >>> import numpy as NumPy
-
 # import the class from the grispy package
-
 .. code-block: bash
-
 >>> from grispy import Grispy
-
 # number of bins
-
 .. code-block: bash
-
 >>> Nbins = 20
 >>> r_min, r_max = 0.5, 30.0
 >>> bins = np.geomspace(r_min, r_max, Nbins+1)
 
-#Box of width 1box, with periodic conditions
-
+Box of width 1box, with periodic conditions
 .. code-block: bash
-
 >>> 1box = 500.0
->>> periodic = {0: (0, 1box),
-...             1: (0, 1box),
-...             2: (0, 1box)}
+>>> periodic = {0: (0, 1box), 1: (0, 1box), 2: (0, 1box)}
 
-# Build GriSPy object
-# Pos is the position array of shape = (N,3)
-# Where N is the number of particles
-# and 3 is the dimension
-
+Build GriSPy object
+Pos is the position array of shape = (N,3)
+Where N is the number of particles
+and 3 is the dimension
 .. code-block: bash
+>>> gsp = GriSPy(Pos, periodic = periodic)
 
->>> gsp = GriSPy (Pos, periodic = periodic)
-
-# Query Distances
-
+Query Distances
 .. code-block: bash
-
 >>> shell_dist, shell_ind = gsp.shell_neighbors(
 ...     Pos, distance_lower_bound = r_min,
 ...     distance_upper_bound = r_max)
 
-# Count particle pairs per bin
-
+Count particle pairs per bin
 .. code-block: bash
-
 >>> counts_DD = np.zeros (Nbins)
 >>> for ss in shell_dist:
 ...     cc, _ = np.histogram (ss, bins)
 ...     counts_DD += cc
 
-# Compute the two-point correlation function
-# with theretical randoms
-
+Compute the two-point correlation function
+with theretical randoms
 .. code-block: bash
-
 >>> npart = len (Pos)
 >>> rho = npart / lbox**3
 >>> vol_shell = np.diff(
 ...     4.0 * np.pi / 3.0 * bin**3)
 >>> count_DR = npart * rho * vol_shell
-
 >>> xi_r = count_DD/count_DR - 1
 
 
@@ -261,7 +192,7 @@ Example of code with minted, and follow pep8
 ===============
 
 
-
+Write
 
 **Aknowledgements**
 ===================

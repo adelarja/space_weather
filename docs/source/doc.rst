@@ -1,7 +1,7 @@
 **Swindpy**
 ***************
 
-.. figure:: _estatico/logo_SWx.png
+.. figure:: _static/logo_SWx.png
    :alt: alternate text
    :height: 200
    :width: 200
