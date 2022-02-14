@@ -55,6 +55,6 @@ def to_csv(date_from: str, date_to: str, filename: str):
             )
 
 
-if __name__ == "__main__":
-    """main cli method."""
+def main():
+    """Main cli method."""
     app()
