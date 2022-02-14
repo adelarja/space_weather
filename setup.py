@@ -83,4 +83,9 @@ setup(
         "Topic :: Scientific/Engineering",
     ],
     include_package_data=True,
+    entry_points={
+        "console_scripts": [
+            "swindpy=solarwindpy.cli:main",
+        ],
+    },
 )
