@@ -22,7 +22,7 @@ sys.path.insert(0, str(solarwindpy))
 
 # -- Project information -----------------------------------------------------
 
-project = 'solarwindpy'
+project = 'swindpy'
 copyright = '2022, Adriana Gulisano, Adel Arja, Violeta Bazzano, Ricardo Pafundi'
 author = 'Adriana Gulisano, Adel Arja, Violeta Bazzano, Ricardo Pafundi'
 

@@ -1,16 +1,15 @@
 **Swindpy**
 ***************
 
-..image:: SPACE_WEATHER/docs/source/_estatico/logo_SWx.png
-    :width: 200
-    :align: center
-    :height: 200
-    :alt: alternate text
+.. figure:: _estatico/logo_SWx.png
+   :alt: alternate text
+   :height: 200
+   :width: 200
+   :scale: 200
+   :align: center
+   :figclass: align-center
 
-    Logo Swindpy
-
-   *Getting swindpy*
-
+ 
 .. sidebar:: Abstract
     :subtitle: swindpy
 
@@ -78,18 +77,27 @@ estimated as well
 **Dependencies for this project**
 =================================
 
-.. code-block:: bash
+    * `NumPy  <https://numpy.org>`_
 
-    * numpy
-    * pandas
-    * scipy 
-    * attrs(>=21.1.0) for building the backend.
-    * matplotlib(>=3.4.0) for plots management.
-    * heliopy==0.15.4
-    * requests
-    * sunpy
-    * h5netcdf
-    * cdflib
+    * `Pandas <https://pandas.pydata.org/>`_
+
+    * `SciPy  <https://scipy.org/>`_
+
+    * `matplotlib  <https://matplotlib.org/>`_
+
+    * `attrs  <https://attrs.org/en/stable/>`_
+
+    * `heliopy==0.15.4  <https://ui.adsabs.harvard.edu/abs/2019zndo...1009079S/abstract>`_
+
+    * `requests  <https://docs.python-requests.org/en/latest/>`_ 
+
+    * `sunpy  <https://sunpy.org/>`_
+
+    * `h5netcdf  <https://anaconda.org/conda-forge/h5netcdf>`_
+
+    * `cdflib  <https://pypi.org/project/cdflib/>`_
+
+      
 
 **Instalation**
 ===============
@@ -124,6 +132,14 @@ Sphinx                   Documentar
 Github                   Compartir el codigo
 readthedocs.org          Publicar la documentacion
 ======================== =========================
+
+**Indexing**
+============
+
+    * `Astroalign <https://arxiv.org/abs/1909.02946/>`_ 
+    * `Feets <https://arxiv.org/abs/1809.02154/>`_ 
+    * `Corral <https://arxiv.org/abs/1701.05566/>`_
+    * `Grispy <https://arxiv.org/abs/1912.09585/>`_
 
 **Contact**
 ===========
