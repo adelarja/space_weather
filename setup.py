@@ -31,6 +31,7 @@ REQUIREMENTS = [
     "sunpy",
     "h5netcdf",
     "cdflib",
+    "typer",
 ]
 
 with open(PATH / "solarwindpy" / "__init__.py") as fp:
