@@ -70,14 +70,10 @@ technique.
 
 
 
-<<<<<<< HEAD
-The MV method finds the direction where sigma_n^2 is minimum under the constraint|n|=1 . The Lagrange multipliers variational method can be used in this determination
+
+The MV method finds the direction where sigma_n^2 is minimum under the constraint
+mod(n)=1 . The Lagrange multipliers variational method can be used in this determination
 lambda is the Lagrange multiplier in the following system of equations:
-=======
- The MV method finds the direction where sigma_n^2 is minimum under the constraint  
- mod(n)=1 . The Lagrange multipliers variational method can be used in this determination
- lambda is the Lagrange multiplier in the following system of equations:
->>>>>>> 04c1ad0c1b159bd2f01d54b8fd1e0ddabb10e632
 
 
 
@@ -123,15 +119,10 @@ lambda is the Lagrange multiplier in the following system of equations:
  distant from the launch time as the spacecraft crosses the MC. This decrease of
  mod(B) can affect significantly the result of the MV method. However, the relevant 
  information to find the cloud orientation is in the rotation of the magnetic field.
-<<<<<<< HEAD
- Thus, to decouple the variation of |B| from the rotation, we apply the MV technique
- to the normalized field vector series: b(t) = B(t)/|B(t)|.
 
+Thus, to decouple the variation of mod(B) from the rotation, we apply the MV technique
+to the normalized field vector series: b(t) = B(t)/mod(B(t)).
 
-=======
- Thus, to decouple the variation of mod(B) from the rotation, we apply the MV technique
- to the normalized field vector series: b(t) = B(t)/mod(B(t)).
->>>>>>> 04c1ad0c1b159bd2f01d54b8fd1e0ddabb10e632
 
 where B^k corresponds to each element k of the  magnetic field series. The field mean 
 value is.
@@ -197,20 +188,16 @@ to the normalized field vector series: b(t) = B(t)/mod(B(t)).
 
 
 
- Without loosing generality we choose delta (the angle of an arbitrary rotation 
- in the plane (Xcloud, Ycloud) such that Xgse.Ycloud = 0, that is:
+Without loosing generality we choose delta (the angle of an arbitrary rotation
+in the plane (Xcloud, Ycloud) such that Xgse.Ycloud = 0, that is:
 
 
 
 
 
- In this way we can apply the technique to the parcel of Solar Wind that corresponds
- to an MC and rotate it in the Cloud Frame.
+In this way we can apply the technique to the parcel of Solar Wind that corresponds
+to an MC and rotate it in the Cloud Frame.
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 04c1ad0c1b159bd2f01d54b8fd1e0ddabb10e632
 The intrinsic cloud reference system and the Geocentric Solar Ecliptic (GSE)
 system of coordinates can be related using the
 following rotation matrix:
@@ -220,114 +207,79 @@ Without loosing generality we choose delta (the angle of an arbitrary rotation
 in the plane (Xcloud, Ycloud) such that Xgse.Ycloud = 0, that is:
 In this way we can apply the technique to the parcel of Solar Wind that corresponds
 to an MC and rotate it in the Cloud Frame.
->>>>>>> a897fb0d1f92006d4abaf23330f3f5e7db08e8f8
 
 **Section 2**
 =============
 
- In this section we describe  the development of the project identified with our logo
- Figure 1. The aim was to produce a package publicly available to find the orientation
- of a MC and rotate it to its local frame. We changed the functions pipe-line structure 
- of our matlab previous implementation to the Object Oriented Programming Python paradigm
- (since Python is a programming language Turing-complete) to provide a package easy to 
- install and run, with an open source repository, providing quality standards to reach 
- a wider community of astrophysicists and astronomers interested in heliophysics and 
- Sun-Earth relationship. Taking into account that a Magnetic Cloud has its own identity, 
- state or attributes and behavior (relationships and methods), the Python paradigm was 
- in order. As can be seen at Figure1 we designed an easy to identify logo for the 
- project as well. Since there were no APIs to find the MC axis orientation implemented 
- in Python and freely offered, we regard our project as a valuable contribution to the 
- heliophysics community.
+In this section we describe  the development of the project identified with our logo
+Figure 1. The aim was to produce a package publicly available to find the orientation
+of a MC and rotate it to its local frame. We changed the functions pipe-line structure
+of our matlab previous implementation to the Object Oriented Programming Python paradigm
+(since Python is a programming language Turing-complete) to provide a package easy to
+install and run, with an open source repository, providing quality standards to reach
+a wider community of astrophysicists and astronomers interested in heliophysics and
+Sun-Earth relationship. Taking into account that a Magnetic Cloud has its own identity,
+state or attributes and behavior (relationships and methods), the Python paradigm was
+in order. As can be seen at Figure1 we designed an easy to identify logo for the
+project as well. Since there were no APIs to find the MC axis orientation implemented
+in Python and freely offered, we regard our project as a valuable contribution to the
+heliophysics community.
 
 **Indexing**
 ------------
-<<<<<<< HEAD
-
-=======
-    Equation 11
->>>>>>> 04c1ad0c1b159bd2f01d54b8fd1e0ddabb10e632
-
-Equation 11
-
-                                                    (11)
-<<<<<<< HEAD
-=======
 
 Equation 11
 (11)
->>>>>>> 04c1ad0c1b159bd2f01d54b8fd1e0ddabb10e632
-
 
 **Section 3**
 =============
 
 Example of code with minted, and follow pep8
-<<<<<<< HEAD
-
-=======
->>>>>>> 04c1ad0c1b159bd2f01d54b8fd1e0ddabb10e632
 .. code-block: bash
-
- >>> import numpy as NumPy
-
+>>> import numpy as NumPy
 # import the class from the grispy package
-
 .. code-block: bash
-
- >>> from grispy import Grispy
-
+>>> from grispy import Grispy
 # number of bins
-
 .. code-block: bash
-
- >>> Nbins = 20
- >>> r_min, r_max = 0.5, 30.0
- >>> bins = np.geomspace(r_min, r_max, Nbins+1)
+>>> Nbins = 20
+>>> r_min, r_max = 0.5, 30.0
+>>> bins = np.geomspace(r_min, r_max, Nbins+1)
 
 Box of width 1box, with periodic conditions
-
 .. code-block: bash
-
- >>> 1box = 500.0
- >>> periodic = {0: (0, 1box), 1: (0, 1box), 2: (0, 1box)}
+>>> 1box = 500.0
+>>> periodic = {0: (0, 1box), 1: (0, 1box), 2: (0, 1box)}
 
 Build GriSPy object
 Pos is the position array of shape = (N,3)
 Where N is the number of particles
 and 3 is the dimension
-
 .. code-block: bash
-
- >>> gsp = GriSPy(Pos, periodic = periodic)
+>>> gsp = GriSPy(Pos, periodic = periodic)
 
 Query Distances
-
 .. code-block: bash
-
 >>> shell_dist, shell_ind = gsp.shell_neighbors(
 ...     Pos, distance_lower_bound = r_min,
 ...     distance_upper_bound = r_max)
 
 Count particle pairs per bin
-
- .. code-block: bash
-
- >>> counts_DD = np.zeros (Nbins)
- >>> for ss in shell_dist:
- ...     cc, _ = np.histogram (ss, bins)
- ...     counts_DD += cc
+.. code-block: bash
+>>> counts_DD = np.zeros (Nbins)
+>>> for ss in shell_dist:
+...     cc, _ = np.histogram (ss, bins)
+...     counts_DD += cc
 
 Compute the two-point correlation function
 with theretical randoms
-
- .. code-block: bash
- 
- >>> npart = len (Pos),
- >>> rho = npart / lbox**3,
- >>> vol_shell = np.diff(
- ...     4.0 * np.pi / 3.0 * bin**3),
- >>> count_DR = npart * rho * vol_shell,
- >>> xi_r = count_DD/count_DR - 1
+.. code-block: bash
+>>> npart = len (Pos),
+>>> rho = npart / lbox**3,
+>>> vol_shell = np.diff(
+...     4.0 * np.pi / 3.0 * bin**3),
+>>> count_DR = npart * rho * vol_shell,
+>>> xi_r = count_DD/count_DR - 1
 
 
 **Conclusions**
@@ -339,4 +291,4 @@ Write
 **Aknowledgements**
 ===================
 
- A.M.G. is member of the Carrera del Invesigador Cientifico, CONICET.
+A.M.G. is member of the Carrera del Invesigador Cientifico, CONICET.
