@@ -19,8 +19,8 @@ Welcome to Swindpy's documentation!
    :numbered:
    :caption: Contents:
 
-   doc
-   doc1
+   swindpy
+   methods
 
 
    
