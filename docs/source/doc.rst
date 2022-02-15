@@ -1,5 +1,5 @@
 **Swindpy**
-***************
+***********
 
 .. figure:: _static/logo_SWx.png
    :alt: alternate text
@@ -168,9 +168,9 @@ We propose using the open source software Solarwindpy for the calculation.......
 **License**
 ===========
 
-The four essential freedoms
+ The four essential freedoms 
 
-A program is free software if users have all four essential freedoms:
+ A program is free software if users have all four essential freedoms:
 
     The freedom to run the program as desired, for any purpose (freedom 0).
     The freedom to study how the program works, and change it to do what you want 
@@ -181,21 +181,21 @@ A program is free software if users have all four essential freedoms:
     to benefit from the changes. Access to the source code is a necessary condition 
     for this.
 
-The two main categories of free software licenses are copyleft and non-copyleft. 
-Copyleft licenses, such as the GNU GPL, insist that modified versions of a free 
-program must also be free software. Non-copyleft licenses do not engage in this.
+ The two main categories of free software licenses are copyleft and non-copyleft. 
+ Copyleft licenses, such as the GNU GPL, insist that modified versions of a free 
+ program must also be free software. Non-copyleft licenses do not engage in this.
 
--BSD License (Berkeley Software Distribution):
+ -BSD License (Berkeley Software Distribution):
 
-It is a permissive free software license. In other words, it is in contrast to 
-copyleft licenses, which have share-alike reciprocity requirements. The BSD license 
-allows the use of the source code in non-free software. The original version has 
-already been revised and its variants are called modified BSD licenses.
+ It is a permissive free software license. In other words, it is in contrast to 
+ copyleft licenses, which have share-alike reciprocity requirements. The BSD license 
+ allows the use of the source code in non-free software. The original version has 
+ already been revised and its variants are called modified BSD licenses.
 
-Copyright <year> <copyright holder>
+ Copyright <year> <copyright holder>
 
-Redistribution and use in source and binary forms, with or without modification, are 
-permitted provided that the following conditions are met:
+ Redistribution and use in source and binary forms, with or without modification, are 
+ permitted provided that the following conditions are met:
 
     Redistributions of source code must retain the above copyright notice, this list 
     of conditions and the following disclaimer.
@@ -206,12 +206,12 @@ permitted provided that the following conditions are met:
     used to endorse or promote products derived from this software without specific 
     prior written permission.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
-EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
-OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
-SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
-INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED 
-TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR 
-BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
-CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+ EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
+ OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
+ SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
+ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED 
+ TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR 
+ BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

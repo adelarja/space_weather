@@ -62,7 +62,7 @@ technique.
  when this method is applied to the magnetic field  B, the mean quadratic deviation in a 
  generic direction n is:
 
-<<<<<<< HEAD
+
 
 
  where B^k corresponds to each element k of the  magnetic field series. The field mean 
@@ -70,9 +70,8 @@ technique.
 
 
 
- The MV method finds the direction where sigma_n^2 is minimum under the constraint  
- |n|=1 . The Lagrange multipliers variational method can be used in this determination
- lambda is the Lagrange multiplier in the following system of equations:
+The MV method finds the direction where sigma_n^2 is minimum under the constraint|n|=1 . The Lagrange multipliers variational method can be used in this determination
+lambda is the Lagrange multiplier in the following system of equations:
 
 
 
@@ -120,7 +119,9 @@ technique.
  information to find the cloud orientation is in the rotation of the magnetic field.
  Thus, to decouple the variation of |B| from the rotation, we apply the MV technique
  to the normalized field vector series: b(t) = B(t)/|B(t)|.
-=======
+
+
+
 where B^k corresponds to each element k of the  magnetic field series. The field mean 
 value is.
 
@@ -158,14 +159,14 @@ mod(B) can affect significantly the result of the MV method. However, the releva
 information to find the cloud orientation is in the rotation of the magnetic field.
 Thus, to decouple the variation of mod(B) from the rotation, we apply the MV technique
 to the normalized field vector series: b(t) = B(t)/mod(B(t)).
->>>>>>> a897fb0d1f92006d4abaf23330f3f5e7db08e8f8
+
 
  Because MV does not give the positive sense of the variance directions, we choose 
  this sense for Xmv so that it makes an acute angle with the Earth-Sun direction 
  (Xgse). We also choose Zmv so that Bzmv is positive at the cloud axis, and Ymv
  is closing the right handed system of coordinates. 
 
-<<<<<<< HEAD
+
  The intrinsic cloud reference system and the Geocentric Solar Ecliptic (GSE)
  system of coordinates can be related using the
  following rotation matrix:
@@ -194,7 +195,8 @@ to the normalized field vector series: b(t) = B(t)/mod(B(t)).
 
  In this way we can apply the technique to the parcel of Solar Wind that corresponds
  to an MC and rotate it in the Cloud Frame.
-=======
+
+
 The intrinsic cloud reference system and the Geocentric Solar Ecliptic (GSE)
 system of coordinates can be related using the
 following rotation matrix:
@@ -225,77 +227,80 @@ to an MC and rotate it in the Cloud Frame.
 
 **Indexing**
 ------------
-<<<<<<< HEAD
-
-    Equation 11
 
 
-.. math::
-
- \sin\theta \cos\varphi  &&&\quad   \sin\theta \sin\varphi  &&&\quad   -\cos\theta\\
- -\sin\varphi            &&&\quad   \cos\varphi             &&&\quad   0 \\
- \cos\theta \cos\varphi  &&&\quad   \cos\theta \sin\varphi  &&&\quad   \sin\theta
-                                                    (11)
-=======
 Equation 11
-(11)
->>>>>>> a897fb0d1f92006d4abaf23330f3f5e7db08e8f8
+
+                                                    (11)
 
 
 **Section 3**
 =============
-<<<<<<< HEAD
 
- Example of code with minted, and follow pep8
-
-=======
 Example of code with minted, and follow pep8
->>>>>>> a897fb0d1f92006d4abaf23330f3f5e7db08e8f8
+
 .. code-block: bash
->>> import numpy as NumPy
+
+ >>> import numpy as NumPy
+
 # import the class from the grispy package
+
 .. code-block: bash
->>> from grispy import Grispy
+
+ >>> from grispy import Grispy
+
 # number of bins
+
 .. code-block: bash
->>> Nbins = 20
->>> r_min, r_max = 0.5, 30.0
->>> bins = np.geomspace(r_min, r_max, Nbins+1)
+
+ >>> Nbins = 20
+ >>> r_min, r_max = 0.5, 30.0
+ >>> bins = np.geomspace(r_min, r_max, Nbins+1)
 
 Box of width 1box, with periodic conditions
+
 .. code-block: bash
->>> 1box = 500.0
->>> periodic = {0: (0, 1box), 1: (0, 1box), 2: (0, 1box)}
+
+ >>> 1box = 500.0
+ >>> periodic = {0: (0, 1box), 1: (0, 1box), 2: (0, 1box)}
 
 Build GriSPy object
 Pos is the position array of shape = (N,3)
 Where N is the number of particles
 and 3 is the dimension
+
 .. code-block: bash
->>> gsp = GriSPy(Pos, periodic = periodic)
+
+ >>> gsp = GriSPy(Pos, periodic = periodic)
 
 Query Distances
+
 .. code-block: bash
+
 >>> shell_dist, shell_ind = gsp.shell_neighbors(
 ...     Pos, distance_lower_bound = r_min,
 ...     distance_upper_bound = r_max)
 
 Count particle pairs per bin
-.. code-block: bash
->>> counts_DD = np.zeros (Nbins)
->>> for ss in shell_dist:
-...     cc, _ = np.histogram (ss, bins)
-...     counts_DD += cc
+
+ .. code-block: bash
+
+ >>> counts_DD = np.zeros (Nbins)
+ >>> for ss in shell_dist:
+ ...     cc, _ = np.histogram (ss, bins)
+ ...     counts_DD += cc
 
 Compute the two-point correlation function
 with theretical randoms
-.. code-block: bash
->>> npart = len (Pos)
->>> rho = npart / lbox**3
->>> vol_shell = np.diff(
-...     4.0 * np.pi / 3.0 * bin**3)
->>> count_DR = npart * rho * vol_shell
->>> xi_r = count_DD/count_DR - 1
+
+ .. code-block: bash
+ 
+ >>> npart = len (Pos),
+ >>> rho = npart / lbox**3,
+ >>> vol_shell = np.diff(
+ ...     4.0 * np.pi / 3.0 * bin**3),
+ >>> count_DR = npart * rho * vol_shell,
+ >>> xi_r = count_DD/count_DR - 1
 
 
 **Conclusions**
