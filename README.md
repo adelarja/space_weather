@@ -20,23 +20,25 @@ The Minimum Variance method (MV) has been extensively used to find the orientati
 In this project the MV approach is used to rotate MCs. In the future, another kind of analysis will be available in the project.
 
 ## Features
-The input file must be a .cdf file with three columns: Bx, By and Bz (Components of Solar Magnetic Cloud in GSE.)
+This package aims tu be used to analyze MCs phenomena.
 
+Currently, it uses Minimum Variance method in order to obtain a rotated cloud.
+
+With help of a command line tool it is also possible to export magnetic cloud data into a
+csv file.
 
 --------------------------------------------------------------------------------
 
 ## Requirements
-You need Python 3.9+ to run solarwindpy.
+You need a Python 3.9+ environment to run solarwindpy.
 
 ## Installation
-Clone this repo and then inside the local directory execute
+The package is available in pypi. You can install it using pip:
 
-        $ pip install -e .
+        $ pip install swindpy
         
-### Test
-Testing solarwindpy.wind
+## Test
+If you want to run the swindpy tests, you have to clone the repository and use the
+pytest module.
 
-        $ cd tests
-        $ python test_wind.py 
-        
- If the assert is satisfied then is printed 'This is the espected result'. If the assert is false, then is printed AssertionError.
+        $ pytest tests
