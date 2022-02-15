@@ -70,8 +70,14 @@ technique.
 
 
 
+<<<<<<< HEAD
 The MV method finds the direction where sigma_n^2 is minimum under the constraint|n|=1 . The Lagrange multipliers variational method can be used in this determination
 lambda is the Lagrange multiplier in the following system of equations:
+=======
+ The MV method finds the direction where sigma_n^2 is minimum under the constraint  
+ mod(n)=1 . The Lagrange multipliers variational method can be used in this determination
+ lambda is the Lagrange multiplier in the following system of equations:
+>>>>>>> 04c1ad0c1b159bd2f01d54b8fd1e0ddabb10e632
 
 
 
@@ -111,16 +117,21 @@ lambda is the Lagrange multiplier in the following system of equations:
  for the axial Bz component, the observations of magnetic clouds, show that the modulus 
  of the magnetic field does not remain constant, being maximum near the cloud axis and 
  minimum toward the cloud boundaries. Moreover, for MCs in expansion and due to magnetic 
- flux conservation in the expanding parcels of fluid, |B| can decrease significantly 
- while the spacecraft observes the cloud. This decrease of |B| with time is called the
+ flux conservation in the expanding parcels of fluid, mod(B) can decrease significantly 
+ while the spacecraft observes the cloud. This decrease of mod(B) with time is called the
  'aging' effect since the {\it in situ} observations are done at a time, which is more 
  distant from the launch time as the spacecraft crosses the MC. This decrease of
- |B| can affect significantly the result of the MV method. However, the relevant 
+ mod(B) can affect significantly the result of the MV method. However, the relevant 
  information to find the cloud orientation is in the rotation of the magnetic field.
+<<<<<<< HEAD
  Thus, to decouple the variation of |B| from the rotation, we apply the MV technique
  to the normalized field vector series: b(t) = B(t)/|B(t)|.
 
 
+=======
+ Thus, to decouple the variation of mod(B) from the rotation, we apply the MV technique
+ to the normalized field vector series: b(t) = B(t)/mod(B(t)).
+>>>>>>> 04c1ad0c1b159bd2f01d54b8fd1e0ddabb10e632
 
 where B^k corresponds to each element k of the  magnetic field series. The field mean 
 value is.
@@ -196,7 +207,10 @@ to the normalized field vector series: b(t) = B(t)/mod(B(t)).
  In this way we can apply the technique to the parcel of Solar Wind that corresponds
  to an MC and rotate it in the Cloud Frame.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 04c1ad0c1b159bd2f01d54b8fd1e0ddabb10e632
 The intrinsic cloud reference system and the Geocentric Solar Ecliptic (GSE)
 system of coordinates can be related using the
 following rotation matrix:
@@ -227,18 +241,31 @@ to an MC and rotate it in the Cloud Frame.
 
 **Indexing**
 ------------
+<<<<<<< HEAD
 
+=======
+    Equation 11
+>>>>>>> 04c1ad0c1b159bd2f01d54b8fd1e0ddabb10e632
 
 Equation 11
 
                                                     (11)
+<<<<<<< HEAD
+=======
+
+Equation 11
+(11)
+>>>>>>> 04c1ad0c1b159bd2f01d54b8fd1e0ddabb10e632
 
 
 **Section 3**
 =============
 
 Example of code with minted, and follow pep8
+<<<<<<< HEAD
 
+=======
+>>>>>>> 04c1ad0c1b159bd2f01d54b8fd1e0ddabb10e632
 .. code-block: bash
 
  >>> import numpy as NumPy
