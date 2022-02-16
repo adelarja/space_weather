@@ -14,10 +14,18 @@ import csv
 from datetime import datetime
 
 from solarwindpy.data_manager import DataManager, Period
+from solarwindpy.plotter import MagneticCloudPlotter
+from solarwindpy.rotation import RotatedWind
 
 import typer
 
 app = typer.Typer()
+
+
+class InvalidDateException(Exception):
+    """Raise this exception when the date is invalid."""
+
+    pass
 
 
 def valid_dates(date_from: str, date_to: str) -> bool:
@@ -30,17 +38,28 @@ def valid_dates(date_from: str, date_to: str) -> bool:
         return False
 
 
-@app.command()
-def to_csv(date_from: str, date_to: str, filename: str):
-    """Magnetic Field data to csv file."""
+def get_magnetic_field_data(date_from: str, date_to: str):
+    """Function to obtain Magnetic Field information."""
     if not valid_dates(date_from, date_to):
-        return
+        raise InvalidDateException("Invalid dates.")
 
     df = datetime.strptime(date_from, "%Y-%m-%d")
     dt = datetime.strptime(date_to, "%Y-%m-%d")
     period = Period(df, dt)
 
     cdf_data = DataManager.get_gse_magnetic_vector(period)
+    filtered_data = DataManager.filter_nan_and_inf_values(cdf_data)
+
+    return filtered_data
+
+
+@app.command()
+def to_csv(date_from: str, date_to: str, filename: str):
+    """Magnetic Field data to csv file."""
+    try:
+        cdf_data = get_magnetic_field_data(date_from, date_to)
+    except InvalidDateException:
+        return
 
     with open(filename + ".csv", "w", newline="") as csv_file:
         writer = csv.writer(csv_file)
@@ -53,6 +72,36 @@ def to_csv(date_from: str, date_to: str, filename: str):
                     magnetic_field.bgse2,
                 ]
             )
+
+
+@app.command()
+def plot_cloud(date_from: str, date_to: str):
+    """Plot a no rotated wind."""
+    try:
+        cdf_data = get_magnetic_field_data(date_from, date_to)
+        plotter = MagneticCloudPlotter(cdf_data)
+        plotter.plot_mf()
+    except InvalidDateException:
+        return
+
+
+@app.command()
+def plot_rotated_cloud(date_from: str, date_to: str):
+    """Plot a rotated wind."""
+    try:
+        filtered_data = get_magnetic_field_data(date_from, date_to)
+        rotated = RotatedWind.get_rotated_wind(filtered_data)
+        plotter = MagneticCloudPlotter(rotated)
+
+        plotter.plot_rw()
+    except InvalidDateException:
+        return
+
+
+@app.command()
+def plot_rotated_and_non_rotated(date_from: str, date_to: str):
+    """Compare magnetic fields and rotated wind."""
+    pass
 
 
 def main():

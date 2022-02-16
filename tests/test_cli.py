@@ -66,6 +66,8 @@ def test_to_csv(tmpdir):
     with mock.patch(
         "heliopy.data.wind.mfi_h0", return_value=fake_generic_series_object
     ):
-        result = runner.invoke(app, ["2021-01-01", "2021-01-02", path[:-4]])
+        result = runner.invoke(
+            app, ["to-csv", "2021-01-01", "2021-01-02", path[:-4]]
+        )
         assert result.exit_code == 0
         assert "".join(p.read()) == EXPECTED_CSV_RESULT
