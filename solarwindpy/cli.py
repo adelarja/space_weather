@@ -13,8 +13,10 @@
 import csv
 from datetime import datetime
 
+import matplotlib.pyplot as plt
+
 from solarwindpy.data_manager import DataManager, Period
-from solarwindpy.plotter import MagneticCloudPlotter
+from solarwindpy.plotter import plot_mf, plot_rw, plot_rw_and_mf
 from solarwindpy.rotation import RotatedWind
 
 import typer
@@ -79,8 +81,8 @@ def plot_cloud(date_from: str, date_to: str):
     """Plot a no rotated wind."""
     try:
         cdf_data = get_magnetic_field_data(date_from, date_to)
-        plotter = MagneticCloudPlotter(cdf_data)
-        plotter.plot_mf()
+        plot_mf(cdf_data)
+        plt.show()
     except InvalidDateException:
         return
 
@@ -91,9 +93,8 @@ def plot_rotated_cloud(date_from: str, date_to: str):
     try:
         filtered_data = get_magnetic_field_data(date_from, date_to)
         rotated = RotatedWind.get_rotated_wind(filtered_data)
-        plotter = MagneticCloudPlotter(rotated)
-
-        plotter.plot_rw()
+        plot_rw(rotated)
+        plt.show()
     except InvalidDateException:
         return
 
@@ -101,7 +102,16 @@ def plot_rotated_cloud(date_from: str, date_to: str):
 @app.command()
 def plot_rotated_and_non_rotated(date_from: str, date_to: str):
     """Compare magnetic fields and rotated wind."""
-    pass
+    try:
+        fig, axs = plt.subplots(2)
+        filtered_data = get_magnetic_field_data(date_from, date_to)
+        rotated = RotatedWind.get_rotated_wind(filtered_data)
+
+        plot_rw_and_mf(filtered_data, rotated, axs)
+        plt.show()
+
+    except InvalidDateException:
+        return
 
 
 def main():
