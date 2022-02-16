@@ -1,7 +1,7 @@
 # This file is part of the
 # Solarwindpy Project(https://github.com/adelarja/space_weather).
 
-# Copyright (c) 2021, Adriana Gulisano, Adel Arja, Ricardo Pafundigit,
+# Copyright (c) 2021, Adriana Gulisano, Adel Arja, Ricardo Pafundi,
 # Violeta Bazzano.
 # All rights reserved.
 
