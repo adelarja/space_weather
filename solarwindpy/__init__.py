@@ -13,4 +13,4 @@ A package to process Magnetic Fields Data and analyze
 magnetic storm phenomena.
 """
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
