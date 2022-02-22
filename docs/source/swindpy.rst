@@ -105,20 +105,128 @@ estimated as well
 
 .. code-block:: bash
 
-    $ pip install libreriaswindpy==0.0.1
+    $ pip install swindpy
 
 
-**Function**
-=============
+**Tutorial**
+============
 
-- **multiplicacion()**
-    Una función que espera dos números y retorna el resultado
+In this tutorial we are going to learn how to rotate a Magnetic Cloud using 
+the swindpy abstractions.
 
-**Algoritmos**
-==============
-
+First of all, we need to set the datetimes we are interesting in:
 
 
+.. code-block:: bash
+
+        from datetime import datetime
+
+        import matplotlib.pyplot as plt
+
+        import solarwindpy.plotter as plotter
+        rom solarwindpy.data_manager import Period, MagneticField, DataManager
+        from solarwindpy.rotation import RotatedWind
+
+For this example, we are going to use this dates: 10-Jan-1997 05:00 
+to 11-Jan-1997 02:00
+
+# We set the datetimes we are interesting in
+
+.. code-block:: bash
+
+        date_from = datetime(1997, 1, 10, 5, 0, 0)
+         date_to = datetime(1997, 1, 11, 2, 0, 0)
+
+# We create the Period object
+
+.. code-block:: bash
+
+        period = Period(date_from, date_to)  
+
+#Using the DataManager, we retrieve the cdf information 
+
+.. code-block:: bash
+
+        cdf_data = DataManager.get_gse_magnetic_vector(period)
+
+The obtained data, is a list o MagneticField objects (a swindpy abstraction), that has 
+information about the datetime and the gse coordinates measures.
+
+.. code-block:: bash
+
+        cdf_data[0]
+     MagneticField(time=Timestamp('1997-01-10 05:00:30'), bgse0=-1.8067849, bgse1=9.860464, bgse2=-8.717464)
+
+Now, using the DataManager, we are able to filter nan and infinite values.
+
+.. code-block:: bash
+
+        filtered_data = DataManager.filter_nan_and_inf_values(cdf_data)
+
+Now we can obtain the RotatedWind simply calling a classmethod
+
+.. code-block:: bash
+
+        rotated_wind = RotatedWind.get_rotated_wind(filtered_data)
+
+Using the plotter method, we are able to plot non rotated winds and rotated winds (we are also able to add labels, 
+change size, etc).   
+
+# Plotting non rotated
+
+.. code-block:: bash
+
+        plotter.plot_mf(filtered_data)
+
+<AxesSubplot:>
+
+                .. figure:: _static/imagen1.png
+                   :align: center
+                   :figclass: align-center 
+
+# Plotting rotated
+
+.. code-block:: bash
+
+        plotter.plot_rw(rotated_wind)
+
+<AxesSubplot:>
+
+                .. figure:: _static/imagen2.png
+                   :align: center
+                   :figclass: align-center 
+
+
+Using swindpy command line interface
+
+We also created a CLI that makes it easier to a user to process magnetic clouds data.
+
+If you want to plot a no rotated cloud, you could do that with the next command:
+
+.. code-block:: bash
+
+        swindpy plot-cloud 2021-01-01 2021-01-02
+
+If you want to plot a rotated cloud, you could do that with the next command:
+
+.. code-block:: bash
+
+        swindpy plot-rotated-cloud 2021-01-01 2021-01-02
+
+To export data about the Magnetic Fields in a period time, use the next command:
+
+.. code-block:: bash
+
+        swindpy to-csv 2021-01-01 2021-01-02 output
+
+The previous command will generate a csv with the period data
+
+You are also able to plot both, no rotated and rotated clouds so you can compare and 
+make a quick analysis of the results:
+
+.. code-block:: bash
+
+        swindpy plot-rotated-and-non-rotated 2021-01-01 2021-01-02
 
 **Que usamos hasta ahora**
 ==========================
