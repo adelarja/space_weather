@@ -181,8 +181,12 @@ change size, etc).
 <AxesSubplot:>
 
                 .. figure:: _static/imagen1.png
+                   :alt: alternate text
+                   :height: 100
+                   :width: 200
+                   :scale: 200
                    :align: center
-                   :figclass: align-center 
+                   :figclass: align-center
 
 # Plotting rotated
 
@@ -192,9 +196,13 @@ change size, etc).
 
 <AxesSubplot:>
 
-                .. figure:: _static/imagen2.png
+                .. figure:: _static/imagen1.png
+                   :alt: alternate text
+                   :height: 100
+                   :width: 200
+                   :scale: 200
                    :align: center
-                   :figclass: align-center 
+                   :figclass: align-center
 
 
 Using swindpy command line interface
