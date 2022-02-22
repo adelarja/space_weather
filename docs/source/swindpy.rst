@@ -253,11 +253,11 @@ make a quick analysis of the results:
 
         swindpy plot-rotated-and-non-rotated 2021-01-01 2021-01-02
 
-**Que usamos hasta ahora**
-==========================
+**What we use so far**
+======================
 
 ======================== =========================
-**Herramientas**         **Detalle**
+**Tools**                **Detail**
 ------------------------ -------------------------
 Python                   Lenguaje
 Pylint                   Sintaxis
