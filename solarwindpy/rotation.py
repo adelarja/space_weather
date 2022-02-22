@@ -11,6 +11,7 @@
 """This module helps to process Magnetic Fields data."""
 
 
+from dataclasses import dataclass
 from enum import Enum
 
 import numpy as np
@@ -213,6 +214,90 @@ def get_main_versor(kind_mv, x_versor_nube, z_versor_nube):
     return main_versor
 
 
+def get_wind_components(wind: list[MagneticField]):
+    """Get the components needed to perform the rotation."""
+    bx = np.array([magnetic_field.bgse0 for magnetic_field in wind])
+    by = np.array([magnetic_field.bgse1 for magnetic_field in wind])
+    bz = np.array([magnetic_field.bgse2 for magnetic_field in wind])
+
+    minimum_variance_matrix = calculate_minimum_variance(bx, by, bz)
+    eigvals, eigvecs = la.eig(minimum_variance_matrix)
+    eigvals = eigvals.real
+    sorted_index = np.argsort(eigvals)
+
+    wind_x_versor = eigvecs[:, sorted_index[0]].reshape(3, 1)
+    wind_z_versor = eigvecs[:, sorted_index[1]].reshape(3, 1)
+    wind_y_versor = eigvecs[:, sorted_index[2]].reshape(3, 1)
+
+    wind_bx = (
+        bx * wind_x_versor[0] + by * wind_x_versor[1] + bz * wind_x_versor[2]
+    )
+    wind_by = (
+        bx * wind_y_versor[0] + by * wind_y_versor[1] + bz * wind_y_versor[2]
+    )
+    wind_bz = (
+        bx * wind_z_versor[0] + by * wind_z_versor[1] + bz * wind_z_versor[2]
+    )
+
+    return (
+        bx,
+        by,
+        bz,
+        wind_bx,
+        wind_by,
+        wind_bz,
+        wind_x_versor,
+        wind_y_versor,
+        wind_z_versor,
+    )
+
+
+def get_rotation_angles(wind: list[MagneticField]):
+    """Given a wind, calculate the rotation angles."""
+    (
+        bx,
+        by,
+        bz,
+        wind_bx,
+        wind_by,
+        wind_bz,
+        wind_x_versor,
+        wind_y_versor,
+        wind_z_versor,
+    ) = get_wind_components(wind)
+
+    wind_bx, wind_x_versor = correct_bx(wind_bx, wind_x_versor, bx, by, bz)
+    wind_bz, wind_z_versor = correct_bz(wind_bz, wind_z_versor, bx, by, bz)
+    _, _, transposed_matrix = correct_by(
+        wind_by, wind_y_versor, wind_x_versor, wind_z_versor, bx, by, bz
+    )
+
+    theta = np.arcsin(transposed_matrix[2][2])
+    phi = np.arctan2(
+        transposed_matrix[1][2] / np.cos(theta),
+        transposed_matrix[0][2] / np.cos(theta),
+    )
+
+    return Angle("theta", theta), Angle("phi", phi)
+
+
+@dataclass
+class Angle:
+    """Dataclass to abstract Angles behavior."""
+
+    name: str
+    angle: float
+
+    def __str__(self):
+        """Improve the angles print."""
+        return f"{self.name}\nRAD: {self.angle}\nDEG: {self.deg}\n"
+
+    @property
+    def deg(self):
+        """Returns the deg value for the angle."""
+        return (180 / np.pi) * self.angle
+
+
 class RotatedWind:
     """Class to represent a rotated wind.
 
@@ -231,34 +316,17 @@ class RotatedWind:
     @classmethod
     def get_rotated_wind(cls, wind: list[MagneticField]):
         """Get a RotatedWind using the minimum variance matrix method."""
-        bx = np.array([magnetic_field.bgse0 for magnetic_field in wind])
-        by = np.array([magnetic_field.bgse1 for magnetic_field in wind])
-        bz = np.array([magnetic_field.bgse2 for magnetic_field in wind])
-
-        minimum_variance_matrix = calculate_minimum_variance(bx, by, bz)
-        eigvals, eigvecs = la.eig(minimum_variance_matrix)
-        eigvals = eigvals.real
-        sorted_index = np.argsort(eigvals)
-
-        wind_x_versor = eigvecs[:, sorted_index[0]].reshape(3, 1)
-        wind_z_versor = eigvecs[:, sorted_index[1]].reshape(3, 1)
-        wind_y_versor = eigvecs[:, sorted_index[2]].reshape(3, 1)
-
-        wind_bx = (
-            bx * wind_x_versor[0]
-            + by * wind_x_versor[1]
-            + bz * wind_x_versor[2]
-        )
-        wind_by = (
-            bx * wind_y_versor[0]
-            + by * wind_y_versor[1]
-            + bz * wind_y_versor[2]
-        )
-        wind_bz = (
-            bx * wind_z_versor[0]
-            + by * wind_z_versor[1]
-            + bz * wind_z_versor[2]
-        )
+        (
+            bx,
+            by,
+            bz,
+            wind_bx,
+            wind_by,
+            wind_bz,
+            wind_x_versor,
+            wind_y_versor,
+            wind_z_versor,
+        ) = get_wind_components(wind)
 
         wind_bx, wind_x_versor = correct_bx(wind_bx, wind_x_versor, bx, by, bz)
         wind_bz, wind_z_versor = correct_bz(wind_bz, wind_z_versor, bx, by, bz)
@@ -273,34 +341,17 @@ class RotatedWind:
         cls, wind: list[MagneticField]
     ):
         """Get a RotatedWind using the transposed matrix method."""
-        bx = np.array([magnetic_field.bgse0 for magnetic_field in wind])
-        by = np.array([magnetic_field.bgse1 for magnetic_field in wind])
-        bz = np.array([magnetic_field.bgse2 for magnetic_field in wind])
-
-        minimum_variance_matrix = calculate_minimum_variance(bx, by, bz)
-        eigvals, eigvecs = la.eig(minimum_variance_matrix)
-        eigvals = eigvals.real
-        sorted_index = np.argsort(eigvals)
-
-        wind_x_versor = eigvecs[:, sorted_index[0]].reshape(3, 1)
-        wind_z_versor = eigvecs[:, sorted_index[1]].reshape(3, 1)
-        wind_y_versor = eigvecs[:, sorted_index[2]].reshape(3, 1)
-
-        wind_bx = (
-            bx * wind_x_versor[0]
-            + by * wind_x_versor[1]
-            + bz * wind_x_versor[2]
-        )
-        wind_by = (
-            bx * wind_y_versor[0]
-            + by * wind_y_versor[1]
-            + bz * wind_y_versor[2]
-        )
-        wind_bz = (
-            bx * wind_z_versor[0]
-            + by * wind_z_versor[1]
-            + bz * wind_z_versor[2]
-        )
+        (
+            bx,
+            by,
+            bz,
+            wind_bx,
+            wind_by,
+            wind_bz,
+            wind_x_versor,
+            wind_y_versor,
+            wind_z_versor,
+        ) = get_wind_components(wind)
 
         wind_bx, wind_x_versor = correct_bx(wind_bx, wind_x_versor, bx, by, bz)
         wind_bz, wind_z_versor = correct_bz(wind_bz, wind_z_versor, bx, by, bz)
@@ -332,50 +383,12 @@ class RotatedWind:
         bx = np.array([magnetic_field.bgse0 for magnetic_field in wind])
         by = np.array([magnetic_field.bgse1 for magnetic_field in wind])
         bz = np.array([magnetic_field.bgse2 for magnetic_field in wind])
+        theta, phi = get_rotation_angles(wind)
 
-        minimum_variance_matrix = calculate_minimum_variance(bx, by, bz)
-        eigvals, eigvecs = la.eig(minimum_variance_matrix)
-        eigvals = eigvals.real
-        sorted_index = np.argsort(eigvals)
+        phi_deg = phi.deg
+        if phi_deg < 0:
+            phi_deg = 360 + phi_deg
 
-        wind_x_versor = eigvecs[:, sorted_index[0]].reshape(3, 1)
-        wind_z_versor = eigvecs[:, sorted_index[1]].reshape(3, 1)
-        wind_y_versor = eigvecs[:, sorted_index[2]].reshape(3, 1)
-
-        wind_bx = (
-            bx * wind_x_versor[0]
-            + by * wind_x_versor[1]
-            + bz * wind_x_versor[2]
-        )
-        wind_by = (
-            bx * wind_y_versor[0]
-            + by * wind_y_versor[1]
-            + bz * wind_y_versor[2]
-        )
-        wind_bz = (
-            bx * wind_z_versor[0]
-            + by * wind_z_versor[1]
-            + bz * wind_z_versor[2]
-        )
-
-        wind_bx, wind_x_versor = correct_bx(wind_bx, wind_x_versor, bx, by, bz)
-        wind_bz, wind_z_versor = correct_bz(wind_bz, wind_z_versor, bx, by, bz)
-        _, _, transposed_matrix = correct_by(
-            wind_by, wind_y_versor, wind_x_versor, wind_z_versor, bx, by, bz
-        )
-
-        tita_deg = np.arcsin(transposed_matrix[2][2]) * 180 / np.pi
-        tita = np.arcsin(transposed_matrix[2][2])
-        fi = np.arctan2(
-            transposed_matrix[1][2] / np.cos(tita),
-            transposed_matrix[0][2] / np.cos(tita),
-        )
-        fi_deg = fi * 180 / np.pi
-        if fi_deg < 0:
-            fi_deg = 360 + fi_deg
-        else:
-            fi_deg = fi_deg
-
-        bx_n, by_n, bz_n = rotation(bx, by, bz, tita_deg, fi_deg)
+        bx_n, by_n, bz_n = rotation(bx, by, bz, theta.deg, phi_deg)
 
         return cls(bx_n, by_n, bz_n)
