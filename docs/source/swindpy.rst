@@ -253,7 +253,7 @@ readthedocs.org          Publicar la documentacion
 **Contact**
 ===========
 
-you can contact us via email...
+You can contact us via email, agulisano@iafe.uba.ar
 
 **Issues**
 ==========
@@ -271,7 +271,9 @@ Changelog
 **Credits**
 ===========
 
-We propose using the open source software Solarwindpy for the calculation.........
+We propose to use the open source software Solarwindpy using for the 
+calculation the Minimum Variance Technique to obtain the orientation 
+of magnetic clouds provided the correct cloud edges are provided.
 
 **License**
 ===========
