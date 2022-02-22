@@ -5,6 +5,7 @@ recursive-include solarwindpy *.cdf
 recursive-include solarwindpy *.py
 
 exclude tox.ini
+exclude .readthedocs.yaml
 exclude pyproject.toml
 
 recursive-exclude tests *

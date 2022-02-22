@@ -22,13 +22,16 @@
 #
 import datetime
 import os
-import solarwindpy
+import pathlib
 import sys
 
-# this path is pointing to project
+import solarwindpy
 
-sys.path.insert(0, str(solarwindpy))
-#sys.path.insert(0, os.path.abspath('../../'))
+# this path is pointing to project/docs/source
+CURRENT_PATH = pathlib.Path(os.path.abspath(os.path.dirname(__file__)))
+SWINDPY_PATH = CURRENT_PATH.parent.parent
+
+sys.path.insert(0, str(SWINDPY_PATH))
 
 # -- Project information -----------------------------------------------------
 
@@ -94,4 +97,3 @@ html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 
 master_doc = 'index'
-
