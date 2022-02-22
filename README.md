@@ -1,6 +1,6 @@
 # solarwindpy
 <p align="center">
-    <img width=200 src="https://raw.githubusercontent.com/adelarja/space_weather/main/res/logo.jpg">
+    <img width=200 src="https://raw.githubusercontent.com/adelarja/space_weather/main/res/Speace_Weather_Logo.svg">
 </p>
 
 [![Build status](https://github.com/adelarja/space_weather/actions/workflows/solarwindpy_ci.yml/badge.svg)](https://github.com/adelarja/space_weather/actions)

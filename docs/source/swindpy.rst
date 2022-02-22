@@ -86,7 +86,7 @@ estimated as well
 
     * `matplotlib  <https://matplotlib.org/>`_
 
-    * `attrs  <https://attrs.org/en/stable/>`_
+    * `typer  <https://typer.tiangolo.com/>`_
 
     * `heliopy==0.15.4  <https://ui.adsabs.harvard.edu/abs/2019zndo...1009079S/abstract>`_
 
