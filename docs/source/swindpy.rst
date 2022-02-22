@@ -188,7 +188,7 @@ change size, etc).
         # Plotting rotated
         plotter.plot_rw(rotated_wind)
 
-.. figure:: _static/imagen1.png
+.. figure:: _static/imagen2.png
    :alt: alternate text
    :height: 100
    :width: 200
