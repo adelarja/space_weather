@@ -290,7 +290,7 @@ class Angle:
 
     def __str__(self):
         """Improve the angles print."""
-        return f"{self.name}\nRAD: {self.angle}\n DEG: {self.deg}\n"
+        return f"{self.name}\nRAD: {self.angle}\nDEG: {self.deg}\n"
 
     @property
     def deg(self):
