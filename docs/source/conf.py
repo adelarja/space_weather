@@ -25,13 +25,14 @@ import os
 import pathlib
 import sys
 
-import solarwindpy
-
 # this path is pointing to project/docs/source
+
 CURRENT_PATH = pathlib.Path(os.path.abspath(os.path.dirname(__file__)))
 SWINDPY_PATH = CURRENT_PATH.parent.parent
 
 sys.path.insert(0, str(SWINDPY_PATH))
+
+import solarwindpy
 
 # -- Project information -----------------------------------------------------
 
