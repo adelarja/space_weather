@@ -205,6 +205,34 @@ change size, etc).
                    :figclass: align-center
 
 
+# Obtain the rotation angles
+
+.. code-block:: bash
+
+        theta, phi = get_rotation_angles(filtered_data)
+
+# Calculate gamma using calc_gamma
+
+.. code-block:: bash
+
+        gamma = Angle(
+                "gamma",
+                calc_gamma(theta.angle, phi.angle)
+        )
+
+        print(theta, phi, gamma)
+
+theta
+ RAD: -0.31457481937133086
+ DEG: -18.02380949106747
+phi
+ RAD: 1.6979828788548021
+ DEG: 97.28725264385352
+gamma
+ RAD: 0.31696887828176834
+ DEG: 18.160978962541225
+
+
 Using swindpy command line interface
 
 We also created a CLI that makes it easier to a user to process magnetic clouds data.
