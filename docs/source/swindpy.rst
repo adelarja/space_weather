@@ -72,7 +72,7 @@ estimated as well
 
 .. code-block:: bash
 
-    * Python 3.10+
+    * Python 3.9+
 
 
 **Dependencies for this project**
@@ -117,7 +117,7 @@ the swindpy abstractions.
 First of all, we need to set the datetimes we are interesting in:
 
 
-.. code-block:: bash
+.. code-block:: python
 
         from datetime import datetime
 
@@ -130,91 +130,78 @@ First of all, we need to set the datetimes we are interesting in:
 For this example, we are going to use this dates: 10-Jan-1997 05:00 
 to 11-Jan-1997 02:00
 
-# We set the datetimes we are interesting in
+.. code-block:: python
 
-.. code-block:: bash
-
+        # We set the datetimes we are interesting in
         date_from = datetime(1997, 1, 10, 5, 0, 0)
-         date_to = datetime(1997, 1, 11, 2, 0, 0)
+        date_to = datetime(1997, 1, 11, 2, 0, 0)
 
-# We create the Period object
+        # We create the Period object
+        period = Period(date_from, date_to)
 
-.. code-block:: bash
-
-        period = Period(date_from, date_to)  
-
-#Using the DataManager, we retrieve the cdf information 
-
-.. code-block:: bash
-
+        #Using the DataManager, we retrieve the cdf information
         cdf_data = DataManager.get_gse_magnetic_vector(period)
 
 The obtained data, is a list o MagneticField objects (a swindpy abstraction), that has 
 information about the datetime and the gse coordinates measures.
 
-.. code-block:: bash
+.. code-block:: python
 
         cdf_data[0]
+
+.. code-block:: bash
+
      MagneticField(time=Timestamp('1997-01-10 05:00:30'), bgse0=-1.8067849, bgse1=9.860464, bgse2=-8.717464)
 
 Now, using the DataManager, we are able to filter nan and infinite values.
 
-.. code-block:: bash
+.. code-block:: python
 
         filtered_data = DataManager.filter_nan_and_inf_values(cdf_data)
 
 Now we can obtain the RotatedWind simply calling a classmethod
 
-.. code-block:: bash
+.. code-block:: python
 
         rotated_wind = RotatedWind.get_rotated_wind(filtered_data)
 
 Using the plotter method, we are able to plot non rotated winds and rotated winds (we are also able to add labels, 
 change size, etc).   
 
-# Plotting non rotated
+.. code-block:: python
 
-.. code-block:: bash
-
+        # Plotting non rotated
         plotter.plot_mf(filtered_data)
 
-<AxesSubplot:>
+.. figure:: _static/imagen1.png
+   :alt: alternate text
+   :height: 100
+   :width: 200
+   :scale: 200
+   :align: center
+   :figclass: align-center
 
-                .. figure:: _static/imagen1.png
-                   :alt: alternate text
-                   :height: 100
-                   :width: 200
-                   :scale: 200
-                   :align: center
-                   :figclass: align-center
 
-# Plotting rotated
 
-.. code-block:: bash
+.. code-block:: python
 
+        # Plotting rotated
         plotter.plot_rw(rotated_wind)
 
-<AxesSubplot:>
+.. figure:: _static/imagen1.png
+   :alt: alternate text
+   :height: 100
+   :width: 200
+   :scale: 200
+   :align: center
+   :figclass: align-center
 
-                .. figure:: _static/imagen1.png
-                   :alt: alternate text
-                   :height: 100
-                   :width: 200
-                   :scale: 200
-                   :align: center
-                   :figclass: align-center
+.. code-block:: python
 
-
-# Obtain the rotation angles
-
-.. code-block:: bash
-
+        # Obtain the rotation angles
         theta, phi = get_rotation_angles(filtered_data)
 
-# Calculate gamma using calc_gamma
-
-.. code-block:: bash
-
+        # Calculate gamma using calc_gamma
         gamma = Angle(
                 "gamma",
                 calc_gamma(theta.angle, phi.angle)
@@ -222,15 +209,17 @@ change size, etc).
 
         print(theta, phi, gamma)
 
-theta
- RAD: -0.31457481937133086
- DEG: -18.02380949106747
-phi
- RAD: 1.6979828788548021
- DEG: 97.28725264385352
-gamma
- RAD: 0.31696887828176834
- DEG: 18.160978962541225
+.. code-block:: bash
+
+        theta
+         RAD: -0.31457481937133086
+         DEG: -18.02380949106747
+        phi
+         RAD: 1.6979828788548021
+         DEG: 97.28725264385352
+        gamma
+         RAD: 0.31696887828176834
+         DEG: 18.160978962541225
 
 
 Using swindpy command line interface
