@@ -259,12 +259,12 @@ make a quick analysis of the results:
 ======================== =========================
 **Tools**                **Detail**
 ------------------------ -------------------------
-Python                   Lenguaje
-Pylint                   Sintaxis
-Pypi                     Publicar la libreria
-Sphinx                   Documentar
-Github                   Compartir el codigo
-readthedocs.org          Publicar la documentacion
+Python                   Language
+Pylint                   Syntax
+Pypi                     Publish the library
+Sphinx                   Keep record
+Github                   Share the code
+readthedocs.org          Publish documentation
 ======================== =========================
 
 **Indexing**
