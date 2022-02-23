@@ -283,7 +283,7 @@ Please submit bug reports, suggestions for improvements and patches via the issu
 
     * `Documentation <https://swindpy.readthedocs.io/en/latest/>`_
     * `PyPl Releases <https://pypi.org/project/swindpy/>`_
-    * `GitHub <https://arxiv.org/abs/1809.02154/>`_
+    * `GitHub <https://github.com/adelarja/space_weather/>`_
 
 **Credits**
 ===========
