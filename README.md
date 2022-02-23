@@ -4,7 +4,9 @@
 </p>
 
 [![Build status](https://github.com/adelarja/space_weather/actions/workflows/solarwindpy_ci.yml/badge.svg)](https://github.com/adelarja/space_weather/actions)
+[![Documentation Status](https://readthedocs.org/projects/swindpy/badge/?version=latest)](https://swindpy.readthedocs.io/en/latest/?badge=latest)
 [![PyPI](https://img.shields.io/pypi/v/swindpy?color=blue)](https://pypi.org/project/swindpy/)
+[![License: BSD](https://img.shields.io/badge/License-BSD-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 ## Motivation
 Magnetic clouds (MCs) are highly magnetized plasma structures that have a low proton temperature and a magnetic fieldvector that rotates when seen by a heliospheric observer.
