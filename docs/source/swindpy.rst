@@ -101,8 +101,8 @@ estimated as well
 
       
 
-**Instalation**
-===============
+**Installation**
+================
 
 .. code-block:: bash
 
@@ -254,8 +254,8 @@ make a quick analysis of the results:
 
         swindpy plot-rotated-and-non-rotated 2021-01-01 2021-01-02
 
-**What we use so far**
-======================
+**Tools that we use so far**
+============================
 
 ======================== =========================
 **Tools**                **Detail**
@@ -284,15 +284,14 @@ You can contact us via email, agulisano@iafe.uba.ar
 **Issues**
 ==========
 
-Please submit bug reports, suggestions for improevements and patches via the issue tracker.
+Please submit bug reports, suggestions for improvements and patches via the issue tracker.
 
 **Links**
 =========
 
-Documentation
-Example Application
-PyPl Releases
-Changelog
+    * `Documentation <https://swindpy.readthedocs.io/en/latest/>`_
+    * `PyPl Releases <https://pypi.org/project/swindpy/>`_
+    * `GitHub <https://arxiv.org/abs/1809.02154/>`_
 
 **Credits**
 ===========
