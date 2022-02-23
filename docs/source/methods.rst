@@ -185,16 +185,6 @@ project as well. Since there were no APIs to find the MC axis orientation implem
 in Python and freely offered, we regard our project as a valuable contribution to the
 heliophysics community.
 
-**Indexing**
-------------
-
-     Equation
-
-               .. figure:: _static/Formula11.png
-                  :align: center
-                  :figclass: align-center 
-
-
 
 **Aknowledgements**
 ===================

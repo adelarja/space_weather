@@ -268,14 +268,6 @@ Github                   Share the code
 readthedocs.org          Publish documentation
 ======================== =========================
 
-**Indexing**
-============
-
-    * `Astroalign <https://arxiv.org/abs/1909.02946/>`_ 
-    * `Feets <https://arxiv.org/abs/1809.02154/>`_ 
-    * `Corral <https://arxiv.org/abs/1701.05566/>`_
-    * `Grispy <https://arxiv.org/abs/1912.09585/>`_
-
 **Contact**
 ===========
 
