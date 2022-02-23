@@ -101,8 +101,8 @@ estimated as well
 
       
 
-**Instalation**
-===============
+**Installation**
+================
 
 .. code-block:: bash
 
@@ -124,9 +124,9 @@ First of all, we need to set the datetimes we are interesting in:
 
         import matplotlib.pyplot as plt
 
-        import solarwindpy.plotter as plotter
-        rom solarwindpy.data_manager import Period, MagneticField, DataManager
-        from solarwindpy.rotation import RotatedWind
+        import swindpy.plotter as plotter
+        from swindpy.data_manager import Period, MagneticField, DataManager
+        from swindpy.rotation import RotatedWind
 
 For this example, we are going to use this dates: 10-Jan-1997 05:00 
 to 11-Jan-1997 02:00
@@ -254,8 +254,8 @@ make a quick analysis of the results:
 
         swindpy plot-rotated-and-non-rotated 2021-01-01 2021-01-02
 
-**What we use so far**
-======================
+**Tools that we use so far**
+============================
 
 ======================== =========================
 **Tools**                **Detail**
@@ -276,15 +276,14 @@ You can contact us via email, agulisano@iafe.uba.ar
 **Issues**
 ==========
 
-Please submit bug reports, suggestions for improevements and patches via the issue tracker.
+Please submit bug reports, suggestions for improvements and patches via the issue tracker.
 
 **Links**
 =========
 
-Documentation
-Example Application
-PyPl Releases
-Changelog
+    * `Documentation <https://swindpy.readthedocs.io/en/latest/>`_
+    * `PyPl Releases <https://pypi.org/project/swindpy/>`_
+    * `GitHub <https://arxiv.org/abs/1809.02154/>`_
 
 **Credits**
 ===========

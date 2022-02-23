@@ -4,7 +4,9 @@
 </p>
 
 [![Build status](https://github.com/adelarja/space_weather/actions/workflows/solarwindpy_ci.yml/badge.svg)](https://github.com/adelarja/space_weather/actions)
+[![Documentation Status](https://readthedocs.org/projects/swindpy/badge/?version=latest)](https://swindpy.readthedocs.io/en/latest/?badge=latest)
 [![PyPI](https://img.shields.io/pypi/v/swindpy?color=blue)](https://pypi.org/project/swindpy/)
+[![License: BSD](https://img.shields.io/badge/License-BSD-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 ## Motivation
 Magnetic clouds (MCs) are highly magnetized plasma structures that have a low proton temperature and a magnetic fieldvector that rotates when seen by a heliospheric observer.
@@ -36,9 +38,22 @@ You need a Python 3.9+ environment to run solarwindpy.
 The package is available in pypi. You can install it using pip:
 
         $ pip install swindpy
+
+#### Developers
+If you are a developer, and want to contribute/change/improve this package, clone the repository
+and install the project:
+
+        $ git clone https://github.com/adelarja/space_weather.git
+        $ cd space_weather
+        $ pip install -e .
         
-## Test
+#### Test
 If you want to run the swindpy tests, you have to clone the repository and use the
 pytest module.
 
         $ pytest tests
+
+You are also able to run a suite of checks with tox:
+
+        $ pip install tox
+        $ tox

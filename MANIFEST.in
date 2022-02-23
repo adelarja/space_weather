@@ -1,8 +1,8 @@
 include LICENSE
 include README.md
 include *.py
-recursive-include solarwindpy *.cdf
-recursive-include solarwindpy *.py
+recursive-include swindpy *.cdf
+recursive-include swindpy *.py
 
 exclude tox.ini
 exclude .readthedocs.yaml
@@ -12,6 +12,6 @@ recursive-exclude tests *
 recursive-exclude docs *
 recursive-exclude res *
 recursive-exclude inherited *
-recursive-exclude solarwindpy *.XLS
-recursive-exclude solarwindpy *.npy
-recursive-exclude solarwindpy *.xls
+recursive-exclude swindpy *.XLS
+recursive-exclude swindpy *.npy
+recursive-exclude swindpy *.xls

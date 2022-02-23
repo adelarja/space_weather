@@ -5,9 +5,9 @@ import matplotlib.pyplot as plt
 
 import pytest
 
-from solarwindpy.data_manager import MagneticField
-from solarwindpy.plotter import plot_mf, plot_rw, plot_rw_and_mf
-from solarwindpy.rotation import RotatedWind
+from swindpy.data_manager import MagneticField
+from swindpy.plotter import plot_mf, plot_rw, plot_rw_and_mf
+from swindpy.rotation import RotatedWind
 
 X_FAKE_VALUES = [1, 2, 3, 4, 5]
 Y_FAKE_VALUES = [0.1, 0.2, 0.3, 0.4, 0.5]

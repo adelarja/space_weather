@@ -16,7 +16,7 @@ import numpy as np
 import pandas as pd
 from pandas import Timestamp
 
-from solarwindpy.data_manager import DataManager, MagneticField, Period
+from swindpy.data_manager import DataManager, MagneticField, Period
 
 
 FAKE_DATAFRAME = pd.DataFrame(

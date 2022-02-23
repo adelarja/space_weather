@@ -32,7 +32,7 @@ SWINDPY_PATH = CURRENT_PATH.parent.parent
 
 sys.path.insert(0, str(SWINDPY_PATH))
 
-import solarwindpy
+import swindpy
 
 # -- Project information -----------------------------------------------------
 
@@ -41,7 +41,7 @@ copyright = '2022, Adriana Gulisano, Adel Arja, Violeta Bazzano, Ricardo Pafundi
 author = 'Adriana Gulisano, Adel Arja, Violeta Bazzano, Ricardo Pafundi'
 
 # The full version, including alpha/beta/rc tags
-release = solarwindpy.__version__
+release = swindpy.__version__
 
 
 # -- General configuration ---------------------------------------------------

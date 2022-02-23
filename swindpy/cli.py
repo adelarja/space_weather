@@ -15,9 +15,9 @@ from datetime import datetime
 
 import matplotlib.pyplot as plt
 
-from solarwindpy.data_manager import DataManager, Period
-from solarwindpy.plotter import plot_mf, plot_rw, plot_rw_and_mf
-from solarwindpy.rotation import RotatedWind
+from swindpy.data_manager import DataManager, Period
+from swindpy.plotter import plot_mf, plot_rw, plot_rw_and_mf
+from swindpy.rotation import RotatedWind
 
 import typer
 
