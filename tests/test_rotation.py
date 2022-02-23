@@ -14,8 +14,8 @@ import numpy as np
 
 import pytest
 
-from solarwindpy.data_manager import MagneticField
-from solarwindpy.rotation import (
+from swindpy.data_manager import MagneticField
+from swindpy.rotation import (
     KindMv,
     RotatedWind,
     get_main_versor,

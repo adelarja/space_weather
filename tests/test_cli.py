@@ -15,7 +15,7 @@ import pandas as pd
 
 import pytest
 
-from solarwindpy.cli import app
+from swindpy.cli import app
 
 from typer.testing import CliRunner
 
@@ -68,7 +68,7 @@ def test_plot_cloud(mocker):
         "heliopy.data.wind.mfi_h0", side_effect=fake_generic_series_object
     )
     mocker.patch("matplotlib.pyplot.show", return_value=True)
-    mocker.patch("solarwindpy.plotter.plot_mf")
+    mocker.patch("swindpy.plotter.plot_mf")
 
     result = runner.invoke(app, ["plot-cloud", "2021-01-01", "2021-01-02"])
     assert result.exit_code == 0

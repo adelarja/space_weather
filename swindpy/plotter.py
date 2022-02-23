@@ -14,8 +14,8 @@ from typing import List
 
 import matplotlib.pyplot as plt
 
-from solarwindpy.data_manager import MagneticField
-from solarwindpy.rotation import RotatedWind
+from swindpy.data_manager import MagneticField
+from swindpy.rotation import RotatedWind
 
 
 def plot_mf(cloud: List[MagneticField], ax=None):

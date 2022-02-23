@@ -13,7 +13,7 @@
 # DOCS
 # =====================================================================
 
-"""This file is for distribute and install solarwindpy."""
+"""This file is for distribute and install swindpy."""
 
 # ======================================================================
 # IMPORTS
@@ -45,7 +45,7 @@ REQUIREMENTS = [
     "typer",
 ]
 
-with open(PATH / "solarwindpy" / "__init__.py") as fp:
+with open(PATH / "swindpy" / "__init__.py") as fp:
     for line in fp.readlines():
         if line.startswith("__version__ = "):
             VERSION = line.split("=", 1)[-1].replace('"', "").strip()
@@ -71,7 +71,7 @@ setup(
     url="https://github.com/adelarja/space_weather",
     py_modules=[],
     packages=[
-        "solarwindpy",
+        "swindpy",
     ],
     license="BSD 3-Clause License",
     install_requires=REQUIREMENTS,
@@ -79,7 +79,7 @@ setup(
         "solar",
         "wind",
         "space weather",
-        "solarwindpy",
+        "swindpy",
         "magnetic cloud",
     ],
     classifiers=[
@@ -96,7 +96,7 @@ setup(
     include_package_data=True,
     entry_points={
         "console_scripts": [
-            "swindpy=solarwindpy.cli:main",
+            "swindpy=swindpy.cli:main",
         ],
     },
 )

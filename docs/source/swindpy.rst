@@ -123,9 +123,9 @@ First of all, we need to set the datetimes we are interesting in:
 
         import matplotlib.pyplot as plt
 
-        import solarwindpy.plotter as plotter
-        rom solarwindpy.data_manager import Period, MagneticField, DataManager
-        from solarwindpy.rotation import RotatedWind
+        import swindpy.plotter as plotter
+        from swindpy.data_manager import Period, MagneticField, DataManager
+        from swindpy.rotation import RotatedWind
 
 For this example, we are going to use this dates: 10-Jan-1997 05:00 
 to 11-Jan-1997 02:00
