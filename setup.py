@@ -43,6 +43,7 @@ REQUIREMENTS = [
     "h5netcdf",
     "cdflib",
     "typer",
+    "xarray",
 ]
 
 with open(PATH / "swindpy" / "__init__.py") as fp:
