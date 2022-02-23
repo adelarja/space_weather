@@ -28,8 +28,8 @@ temperature and a magnetic field vector that
 rotates when seen by a heliospheric
 observer.
 
-As motivation MC are the most geo-effective structures in the Interplanetary 
-medium. 
+As motivation MC are the most geo-effective structures in the 
+Interplanetary medium. 
 Even though MCs have been studied for more than 25 years,
 there is no agreement about its true
 magnetic configuration.  This is mainly because
@@ -38,11 +38,12 @@ situ by a spacecraft correspond only to the one dimensional
 cut along its trajectory and, thus,
 it is necessary to make some assumptions to infer
 the cloud 3D structure from observations.
-Magnetic Clouds have been locally considered as cylindrical symmetric structures.
+Magnetic Clouds have been locally considered as cylindrical symmetric 
+structures.
 In order to obtain good estimations of these quantities,
 it is necessary to find the correct MC orientation, and
 improve the estimation of its size and components
-of $\bf B$ in the cloud frame.
+of B in the cloud frame.
 
 The Minimum Variance method (MV) has been extensively
 used to find the orientation of structures
@@ -52,7 +53,7 @@ The Minimum Variance method applied to the observed temporal
 series of the magnetic field can estimate quite well
 the orientation of the cloud axis, when
 the distance between the axis and the spacecraft
-trajectory in the MC (the impact parameter, $p$)
+trajectory in the MC (the impact parameter, p)
 is low with respect to the cloud radius.
 
 The MV method has two main advantages
@@ -63,7 +64,7 @@ and (2) it makes a minimum number of assumptions on
 the magnetic configuration, only local cylindrical symmetry  
 (so it is model independent). 
 
-When $p$ is significant,the MV approach provides orientations
+When p is significant,the MV approach provides orientations
 with more error from the real ones, and these errors can be 
 estimated as well
 
@@ -188,7 +189,7 @@ change size, etc).
         # Plotting rotated
         plotter.plot_rw(rotated_wind)
 
-.. figure:: _static/imagen1.png
+.. figure:: _static/imagen2.png
    :alt: alternate text
    :height: 100
    :width: 200
@@ -253,18 +254,18 @@ make a quick analysis of the results:
 
         swindpy plot-rotated-and-non-rotated 2021-01-01 2021-01-02
 
-**Que usamos hasta ahora**
-==========================
+**What we use so far**
+======================
 
 ======================== =========================
-**Herramientas**         **Detalle**
+**Tools**                **Detail**
 ------------------------ -------------------------
-Python                   Lenguaje
-Pylint                   Sintaxis
-Pypi                     Publicar la libreria
-Sphinx                   Documentar
-Github                   Compartir el codigo
-readthedocs.org          Publicar la documentacion
+Python                   Language
+Pylint                   Syntax
+Pypi                     Publish the library
+Sphinx                   Keep record
+Github                   Share the code
+readthedocs.org          Publish documentation
 ======================== =========================
 
 **Indexing**
