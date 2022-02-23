@@ -36,9 +36,22 @@ You need a Python 3.9+ environment to run solarwindpy.
 The package is available in pypi. You can install it using pip:
 
         $ pip install swindpy
+
+#### Developers
+If you are a developer, and want to contribute/change/improve this package, clone the repository
+and install the project:
+
+        $ git clone https://github.com/adelarja/space_weather.git
+        $ cd space_weather
+        $ pip install -e .
         
-## Test
+#### Test
 If you want to run the swindpy tests, you have to clone the repository and use the
 pytest module.
 
         $ pytest tests
+
+You are also able to run a suite of checks with tox:
+
+        $ pip install tox
+        $ tox
